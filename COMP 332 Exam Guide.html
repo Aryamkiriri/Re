@@ -1,0 +1,1214 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>COMP 332 Exam Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&display=swap">
+<style>
+/* Layout: sticky tab bar + single reading column; every topic is a bilingual EN | AR pair, doctor's picks flagged in amber. */
+:root{
+  --bg:#f2f5f8; --surface:#ffffff; --ink:#13202c; --muted:#5a6b7b; --line:#d6dee6;
+  --accent:#0a5c99; --accent-soft:#e3f0fa; --hot:#9a5a00; --hot-soft:#fff1d6; --hot-line:#e8c06a;
+  --ok:#17794a; --ok-soft:#e1f4ea; --bad:#b4262e; --bad-soft:#fbe5e6; --code:#eaf0f5;
+  --f-display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-ar:"IBM Plex Sans Arabic","IBM Plex Sans",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1620; --surface:#16212d; --ink:#e6edf4; --muted:#9fb0c0; --line:#2a3a4a;
+  --accent:#6bb7ee; --accent-soft:#16344b; --hot:#f2b755; --hot-soft:#3a2b0f; --hot-line:#7a5a1a;
+  --ok:#59d08f; --ok-soft:#133323; --bad:#ff8087; --bad-soft:#3c1a1d; --code:#1d2b3a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1620; --surface:#16212d; --ink:#e6edf4; --muted:#9fb0c0; --line:#2a3a4a;
+  --accent:#6bb7ee; --accent-soft:#16344b; --hot:#f2b755; --hot-soft:#3a2b0f; --hot-line:#7a5a1a;
+  --ok:#59d08f; --ok-soft:#133323; --bad:#ff8087; --bad-soft:#3c1a1d; --code:#1d2b3a; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:980px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0 0 .7em}
+ul,ol{margin:.3em 0 .8em;padding-inline-start:1.3em}
+li{margin:.2em 0}
+b,strong{font-weight:600}
+code,.mono{font-family:var(--f-mono);font-size:.88em;background:var(--code);padding:.1em .4em;border-radius:4px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* header */
+header{padding:28px 0 14px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end}
+.brand small{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.brand h1{font-size:clamp(28px,5vw,44px);font-weight:800}
+.brand .ar-sub{font-family:var(--f-ar);color:var(--muted);margin-top:4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.seg button{background:none;border:0;padding:8px 14px;font-size:14px;font-weight:500}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.seg button+button{border-inline-start:1px solid var(--line)}
+
+/* tabs */
+.tabsbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-left,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.tabs{display:flex;gap:4px;overflow-x:auto;max-width:980px;margin:0 auto;scrollbar-width:thin}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:12px 14px;white-space:nowrap;font-weight:500;color:var(--muted)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+.tabs .ar{font-family:var(--f-ar);font-size:.85em;display:block;line-height:1.2;font-weight:400}
+
+/* bilingual */
+.pane{display:none;padding-top:22px}
+.pane.on{display:block}
+.bi{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 4px}
+.bi>.en,.bi>.ar{min-width:0}
+.ar{font-family:var(--f-ar);direction:rtl;text-align:right;line-height:1.85}
+.ar code,.ar .mono{direction:ltr;unicode-bidi:embed;display:inline-block}
+body.m-en .ar:not(.keep),body.m-en .tabs .ar{display:none}
+body.m-ar .en{display:none}
+body.m-en .bi,body.m-ar .bi{grid-template-columns:1fr}
+body.m-ar .tabs .en{display:none}
+body.m-ar .tabs .ar{display:inline}
+.tabs button .en{display:inline}
+@media (max-width:720px){.bi{grid-template-columns:1fr;gap:6px}.bi>.ar{padding-bottom:10px;border-bottom:1px dashed var(--line);margin-bottom:8px}}
+
+/* cards */
+.topic{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 18px}
+.topic.hot{border-color:var(--hot-line)}
+.t-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:flex-start;margin-bottom:12px}
+.t-head h3{font-size:22px}
+.t-head .ar-h{font-family:var(--f-ar);font-size:18px;font-weight:600;color:var(--muted);direction:rtl}
+.tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:var(--code);color:var(--muted);white-space:nowrap}
+.tag.hot{background:var(--hot-soft);color:var(--hot);font-weight:600}
+.tag.long{background:var(--bad-soft);color:var(--bad);font-weight:600}
+.sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+.answer{background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin:12px 0}
+.answer .lab{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px;display:block}
+.answer.ar-lab .lab{direction:rtl;font-family:var(--f-ar);letter-spacing:0;text-transform:none;font-size:13px}
+.note{background:var(--hot-soft);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:15px}
+.note .lab{font-weight:700;color:var(--hot)}
+.simple{border-inline-start:3px solid var(--ok);padding:4px 12px;margin:10px 0;background:var(--ok-soft);border-radius:0 8px 8px 0;font-size:15px}
+.ar .simple,.simple.ar{border-inline-start:3px solid var(--ok)}
+.simple .lab{font-weight:700;color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+.tw{overflow-x:auto;margin:8px 0 12px;border:1px solid var(--line);border-radius:10px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+th{background:var(--code);font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.ar,th.ar{text-align:right}
+.reg td:first-child{font-family:var(--f-mono);font-weight:600;color:var(--accent);white-space:nowrap}
+
+/* priority checklist */
+.hero{background:var(--hot-soft);border:1px solid var(--hot-line);border-radius:14px;padding:18px 20px;margin-bottom:18px}
+.hero h2{font-size:24px;margin-bottom:6px}
+.prog{height:10px;border-radius:99px;background:var(--surface);overflow:hidden;margin:12px 0 4px;border:1px solid var(--hot-line)}
+.prog i{display:block;height:100%;background:var(--hot);width:0;transition:width .25s}
+.chk{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.chk li{margin:0}
+.chk label{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.chk input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}
+.chk label:has(input:checked){background:var(--ok-soft);border-color:var(--ok)}
+.chk .goto{font-size:13px;color:var(--accent);text-decoration:underline;background:none;border:0;padding:0;margin-top:4px}
+.chk .tags{margin-top:4px}
+
+/* diagrams */
+.diag{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.diag svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.diag figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:6px}
+.box{border:2px solid var(--accent);border-radius:10px;padding:10px 12px;background:var(--surface)}
+.box>b.t{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.nest{display:grid;gap:10px}
+.nest.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.nest.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:560px){.nest.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.box.sm{border-width:1px;padding:8px 10px;font-size:14px}
+.box.bus{background:var(--accent);color:var(--surface);text-align:center;border-color:var(--accent);font-weight:600}
+.box.hotb{border-color:var(--hot);background:var(--hot-soft)}
+
+/* instruction cycle sim */
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
+.regs{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
+.reg{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.reg small{font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.05em;display:block}
+.reg b{font-family:var(--f-mono);font-size:20px;font-weight:600}
+.reg.chg{border-color:var(--hot);background:var(--hot-soft);animation:pop .4s}
+@keyframes pop{from{transform:scale(1.06)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.reg.chg{animation:none}}
+.stepbox{border-radius:10px;background:var(--accent-soft);padding:12px 14px;min-height:92px}
+.stepbox .n{font-family:var(--f-mono);font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.05em}
+.stepbox .what{font-weight:600;font-size:17px;margin:2px 0}
+.phase{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.phase span{font-family:var(--f-mono);font-size:12px;padding:3px 10px;border-radius:99px;background:var(--code);color:var(--muted)}
+.phase span.on{background:var(--accent);color:var(--surface);font-weight:600}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.btn{background:var(--accent);color:var(--surface);border:0;border-radius:9px;padding:9px 16px;font-weight:600}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.memtab{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:13px;margin-top:8px;color:var(--muted)}
+.memtab span{border:1px dashed var(--line);border-radius:6px;padding:3px 8px}
+.toggle{display:inline-flex;gap:8px;align-items:center;font-size:14px}
+.toggle input{width:18px;height:18px;accent-color:var(--accent)}
+
+/* hierarchy */
+.hier{display:grid;gap:6px;margin:10px 0}
+.hier button{display:grid;grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,1fr));gap:10px;align-items:center;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.hier button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.hier .nm b{display:block;font-size:15px}
+.hier .nm span{font-size:12.5px;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--code);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:99px}
+.hier .lbl{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
+.hhead{display:grid;grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,1fr));gap:10px;padding:0 12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:560px){.hier button,.hhead{grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}.hier .nm span{display:none}}
+
+/* cache sim */
+.mapgrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin:8px 0}
+.mapgrid div{font-family:var(--f-mono);font-size:12px;text-align:center;padding:6px 0;border-radius:6px;color:#fff;font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;margin:8px 0}
+.row label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+input[type=text],input[type=number],select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+.seqout{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.seqout span{font-family:var(--f-mono);font-size:13px;padding:5px 9px;border-radius:8px;border:1px solid var(--line)}
+.seqout .hit{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.seqout .miss{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.cachelines{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:8px 0}
+.cachelines div{border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-family:var(--f-mono);font-size:12.5px;background:var(--bg)}
+.cachelines small{display:block;color:var(--muted);font-size:10.5px}
+
+/* quiz + cards */
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.qmeta{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12.5px;color:var(--muted);margin-bottom:10px;gap:8px;flex-wrap:wrap}
+.qq{font-size:19px;font-weight:600;margin-bottom:4px}
+.opts{display:grid;gap:8px;margin:14px 0}
+.opt{text-align:start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 14px;display:block;width:100%}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.opt .ar{font-size:15px;color:var(--muted);margin-top:2px}
+.why{margin-top:10px;padding:12px 14px;border-radius:10px;background:var(--accent-soft)}
+.score{font-family:var(--f-display);font-size:56px;font-weight:800;line-height:1}
+.flash{perspective:1200px;margin:10px 0}
+.fc{width:100%;min-height:230px;border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:24px;display:grid;place-items:center;text-align:center;position:relative}
+.fc .side{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);position:absolute;top:12px;inset-inline-start:16px}
+.fc.back{background:var(--accent-soft);border-color:var(--accent)}
+.fc .en{font-size:19px;font-weight:600;white-space:pre-line}
+.fc.back .en{font-size:16px;font-weight:500;text-align:start}
+.fc .ar{text-align:center;margin-top:8px;color:var(--muted);font-size:16px;white-space:pre-line}
+.fc.back .ar{text-align:right}
+.hint{font-size:13px;color:var(--muted);text-align:center;margin:6px 0}
+.pill{display:inline-block;background:var(--code);border-radius:99px;padding:2px 10px;font-size:13px}
+footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+
+details.qa{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--bg)}
+details.qa summary{cursor:pointer;padding:11px 14px;font-weight:500;list-style:none}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary::after{content:"Show answer · الجواب";float:inline-end;font-family:var(--f-mono);font-size:11px;color:var(--accent);margin-inline-start:10px}
+details.qa[open] summary::after{content:"Hide"}
+details.qa[open]{background:var(--surface);border-color:var(--accent)}
+details.qa .ans{padding:2px 14px 14px;border-top:1px dashed var(--line)}
+details.qa .ans .ar{margin-top:4px}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="brand">
+    <small>COMP 332 · Computer Architecture · Midterm</small>
+    <h1>COMP 332 Exam Guide</h1>
+    <div class="ar-sub ar keep" lang="ar">دليل المراجعة · إنجليزي + عربي · خطوة بخطوة</div>
+  </div>
+  <div class="seg" role="group" aria-label="Language">
+    <button id="m-both" aria-pressed="true">EN + عربي</button>
+    <button id="m-en" aria-pressed="false">EN</button>
+    <button id="m-ar" aria-pressed="false">عربي</button>
+  </div>
+</header>
+
+<div class="tabsbar"><nav class="tabs" role="tablist" id="tabs">
+  <button role="tab" data-t="start" aria-selected="true"><span class="en">Start here</span><span class="ar" lang="ar">ابدأ هنا</span></button>
+  <button role="tab" data-t="papers" aria-selected="false"><span class="en">Sample papers</span><span class="ar" lang="ar">نماذج اختبار</span></button>
+  <button role="tab" data-t="ch1" aria-selected="false"><span class="en">Chapter 1</span><span class="ar" lang="ar">الفصل ١</span></button>
+  <button role="tab" data-t="ch2" aria-selected="false"><span class="en">Chapter 2</span><span class="ar" lang="ar">الفصل ٢</span></button>
+  <button role="tab" data-t="ch3" aria-selected="false"><span class="en">Chapter 3</span><span class="ar" lang="ar">الفصل ٣</span></button>
+  <button role="tab" data-t="quiz" aria-selected="false"><span class="en">Quiz</span><span class="ar" lang="ar">اختبار</span></button>
+  <button role="tab" data-t="cards" aria-selected="false"><span class="en">Flashcards</span><span class="ar" lang="ar">بطاقات</span></button>
+</nav></div>
+
+<main>
+<!-- ===================== START ===================== -->
+<section class="pane on" id="p-start">
+  <div class="hero">
+    <h2>What your doctor said will be on the exam</h2>
+    <div class="ar keep" lang="ar" style="font-weight:600">اللي قالته الدكتورة إنه راح ينزل في الاختبار</div>
+    <p class="en" style="margin-top:8px">Tick each item when you can explain it without looking. Do them in this order: the top ones are the most likely questions.</p>
+    <p class="ar" lang="ar">علّم على كل بند لما تقدرين تشرحينه بدون ما تطالعين. ابدئي من فوق لتحت، لأن الأولى هي الأكثر احتمالًا.</p>
+    <div class="prog"><i id="progbar"></i></div>
+    <div class="en" style="font-size:13px" id="proglabel">0 of 0 done</div>
+  </div>
+
+  <ul class="chk" id="checklist"></ul>
+
+  <div class="topic" style="margin-top:18px">
+    <div class="t-head"><h3>How exam questions will look</h3><span class="ar-h" lang="ar">شكل الأسئلة</span></div>
+    <div class="bi">
+      <div class="en"><ul>
+        <li><b>Choose the term</b>: "____ describes what the computer can do" → <i>Architecture</i>.</li>
+        <li><b>Define</b> (1 to 3 marks): ISA, core, organization.</li>
+        <li><b>List</b>: four functions, four components, three key concepts.</li>
+        <li><b>Draw</b>: the functional view of the computer.</li>
+        <li><b>Long answer (4 marks)</b>: instruction cycle, von Neumann machine.</li>
+        <li><b>Direction questions</b>: "going down the hierarchy, does capacity increase or decrease?"</li>
+      </ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>اختاري المصطلح</b>: "____ يصف ماذا يستطيع الحاسوب أن يفعل" ← <i>Architecture</i>.</li>
+        <li><b>عرّفي</b> (من درجة إلى ٣): ISA, core, organization.</li>
+        <li><b>اذكري</b>: الوظائف الأربع، المكوّنات الأربعة، المفاهيم الثلاثة.</li>
+        <li><b>ارسمي</b>: المنظور الوظيفي للحاسوب (Functional view).</li>
+        <li><b>سؤال طويل (٤ درجات)</b>: دورة التعليمة (Instruction cycle)، آلة فون نيومان.</li>
+        <li><b>أسئلة الاتجاه</b>: "كلما نزلنا في الهرم، السعة تزيد أو تنقص؟"</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="topic">
+    <div class="t-head"><h3>The whole course in 60 seconds</h3><span class="ar-h" lang="ar">كل المادة في دقيقة</span></div>
+    <div class="bi">
+      <div class="en">
+        <p>A computer takes <b>input</b>, <b>processes</b> it using a <b>program</b>, and gives <b>output</b>. The program and data both sit in <b>memory</b>. The <b>CPU</b> repeats one loop forever: <b>fetch</b> an instruction from memory, then <b>execute</b> it. Parts talk to each other over a <b>bus</b>. Memory comes in layers: tiny and fast near the CPU, big and slow far away. A small fast <b>cache</b> sits between the CPU and main memory to keep copies of what you use most.</p>
+      </div>
+      <div class="ar" lang="ar">
+        <p>الحاسوب يأخذ <b>مدخلات (input)</b> ويعالجها (<b>process</b>) حسب <b>برنامج (program)</b> ويعطي <b>مخرجات (output)</b>. البرنامج والبيانات كلاهما في <b>الذاكرة (memory)</b>. المعالج <b>CPU</b> يكرر حلقة واحدة دائمًا: يجلب تعليمة من الذاكرة (<b>fetch</b>) ثم ينفّذها (<b>execute</b>). الأجزاء تتواصل عبر <b>الناقل (bus)</b>. الذاكرة طبقات: صغيرة وسريعة قرب المعالج، وكبيرة وبطيئة بعيدًا عنه. والـ <b>cache</b> ذاكرة صغيرة سريعة بين المعالج والذاكرة الرئيسية تحتفظ بنسخ من الأشياء الأكثر استخدامًا.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CH1 ===================== -->
+<section class="pane" id="p-ch1">
+
+  <div class="topic hot" id="c1-arch">
+    <div class="t-head"><div><h3>1. Computer, Architecture &amp; Organization</h3><div class="ar-h" lang="ar">الحاسوب، المعمارية، والتنظيم</div></div>
+      <div class="tags"><span class="tag hot">Slides 9, 10</span><span class="tag">Define / Choose</span></div></div>
+    <div class="bi">
+      <div class="en">
+        <p><b>Computer:</b> a device that accepts <b>input</b> (digital data), <b>processes</b> it following a program (a sequence of instructions), and produces <b>output</b>. Complex computers also <b>store</b> data, including the program itself.</p>
+      </div>
+      <div class="ar" lang="ar">
+        <p><b>الحاسوب (Computer):</b> جهاز يستقبل <b>مدخلات</b> (بيانات رقمية) و<b>يعالجها</b> حسب برنامج (سلسلة تعليمات) وينتج <b>مخرجات</b>. والحواسيب المعقدة <b>تخزّن</b> البيانات أيضًا، بما فيها البرنامج نفسه.</p>
+      </div>
+    </div>
+
+    <div class="sub">Architecture vs Organization · المعمارية مقابل التنظيم</div>
+    <div class="tw"><table>
+      <tr><th></th><th>Architecture</th><th>Organization</th></tr>
+      <tr><td><b>Question it answers</b><br><span class="ar" lang="ar">السؤال</span></td><td>"<b>What</b> does the computer do?"<br><span class="ar" lang="ar">ماذا يفعل الحاسوب؟</span></td><td>"<b>How</b> are the features built?"<br><span class="ar" lang="ar">كيف تم تنفيذ الميزات؟</span></td></tr>
+      <tr><td><b>Who sees it</b><br><span class="ar" lang="ar">من يراه</span></td><td><b>Visible</b> to the programmer<br><span class="ar" lang="ar">ظاهر للمبرمج</span></td><td><b>Transparent</b> (hidden) from the programmer<br><span class="ar" lang="ar">مخفي عن المبرمج</span></td></tr>
+      <tr><td><b>Examples</b><br><span class="ar" lang="ar">أمثلة</span></td><td>Instruction set, number of bits for data, I/O mechanisms, addressing techniques<br><span class="ar" lang="ar">مجموعة التعليمات، عدد البتات، آليات الإدخال والإخراج، تقنيات العنونة</span></td><td>Control signals, interfaces to peripherals, memory technology used<br><span class="ar" lang="ar">إشارات التحكم، واجهات الأجهزة الطرفية، تقنية الذاكرة</span></td></tr>
+      <tr><td><b>Multiply example</b><br><span class="ar" lang="ar">مثال الضرب</span></td><td>"Is there a multiply instruction?"<br><span class="ar" lang="ar">هل توجد تعليمة ضرب؟</span></td><td>"Is there a hardware multiply unit, or repeated addition?"<br><span class="ar" lang="ar">هل توجد وحدة ضرب بالعتاد أم جمع متكرر؟</span></td></tr>
+    </table></div>
+
+    <div class="simple en"><span class="lab">Easy way to remember:</span> a car. <b>Architecture</b> = what the driver sees (steering wheel, pedals, gears). <b>Organization</b> = what's under the hood (engine type). Two cars can have the same pedals but different engines.</div>
+    <div class="simple ar" lang="ar"><span class="lab">طريقة سهلة للحفظ:</span> السيارة. <b>Architecture</b> = اللي يشوفه السائق (المقود، الدواسات، القير). <b>Organization</b> = اللي تحت الغطاء (نوع المحرك). سيارتان ممكن يكون عندهما نفس الدواسات بمحركين مختلفين.</div>
+
+    <div class="answer"><span class="lab">Exam definition · ISA (Instruction Set Architecture)</span>
+      <div class="bi"><div class="en">The ISA defines <b>instruction formats, opcodes, registers, instruction and data memory</b>; the <b>effect of executed instructions</b> on registers and memory; and an <b>algorithm for controlling instruction execution</b>.</div>
+      <div class="ar" lang="ar">الـ ISA تحدد <b>صيغ التعليمات، رموز العمليات (opcodes)، المسجّلات، ذاكرة التعليمات والبيانات</b>؛ و<b>أثر تنفيذ التعليمات</b> على المسجلات والذاكرة؛ و<b>خوارزمية للتحكم بتنفيذ التعليمات</b>.</div></div></div>
+    <div class="note en"><span class="lab">Same family idea:</span> all Intel x86 chips share one architecture (so old code still runs, "backwards compatible") but their organization differs between versions.</div>
+    <div class="note ar" lang="ar"><span class="lab">فكرة العائلة:</span> كل معالجات Intel x86 لها نفس المعمارية (فالبرامج القديمة تشتغل، أي <i>backwards compatible</i>) لكن التنظيم يختلف من إصدار لآخر.</div>
+  </div>
+
+  <div class="topic hot" id="c1-func">
+    <div class="t-head"><div><h3>2. Structure &amp; the 4 Functions</h3><div class="ar-h" lang="ar">الهيكل والوظائف الأربع</div></div>
+      <div class="tags"><span class="tag hot">Slides 11, 12, 14</span><span class="tag">List / Draw</span></div></div>
+    <div class="bi">
+      <div class="en"><p><b>Structure</b> = how the components are connected and depend on each other.<br><b>Function</b> = what each component does as part of the structure.</p></div>
+      <div class="ar" lang="ar"><p><b>الهيكل (Structure)</b> = كيف ترتبط المكوّنات ببعضها وكيف تعتمد على بعضها.<br><b>الوظيفة (Function)</b> = ماذا يفعل كل مكوّن ضمن الهيكل.</p></div>
+    </div>
+    <div class="answer"><span class="lab">Exam answer · The four functions of a computer</span>
+      <div class="bi"><div class="en"><ol>
+        <li><b>Data processing</b> (done by the CPU)</li>
+        <li><b>Data storage</b> (memory)</li>
+        <li><b>Data movement</b> (I/O)</li>
+        <li><b>Control</b> (the control unit manages the other three)</li></ol></div>
+      <div class="ar" lang="ar"><ol>
+        <li><b>معالجة البيانات</b> (Data processing) ← المعالج CPU</li>
+        <li><b>تخزين البيانات</b> (Data storage) ← الذاكرة</li>
+        <li><b>نقل البيانات</b> (Data movement) ← الإدخال والإخراج I/O</li>
+        <li><b>التحكم</b> (Control) ← وحدة التحكم تدير الثلاثة الأخرى</li></ol></div></div>
+      <div class="en" style="font-size:14px;color:var(--muted)">Memory trick: <b>P-S-M-C</b> = "Please Store My Cookies".</div>
+    </div>
+
+    <div class="sub">Draw this: Functional view of the computer (Figure 1.1) · ارسمي هذا</div>
+    <figure class="diag" style="margin:12px 0">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Functional view of the computer: data movement apparatus, control mechanism, data storage facility, data processing facility inside the computer, connected to the operating environment">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)"/></marker></defs>
+        <rect x="8" y="8" width="624" height="344" rx="14" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="6 5"/>
+        <text x="24" y="32" font-size="13" font-family="IBM Plex Mono,monospace" fill="var(--muted)">THE COMPUTER</text>
+        <rect x="200" y="50" width="240" height="56" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="320" y="84" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Data movement apparatus</text>
+        <rect x="230" y="150" width="180" height="56" rx="10" fill="var(--hot-soft)" stroke="var(--hot)" stroke-width="2"/>
+        <text x="320" y="184" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Control mechanism</text>
+        <rect x="40" y="240" width="220" height="56" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="150" y="274" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Data storage facility</text>
+        <rect x="380" y="240" width="220" height="56" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="490" y="274" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Data processing facility</text>
+        <path d="M320 150V108" stroke="var(--hot)" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M280 206L190 238" stroke="var(--hot)" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M360 206L450 238" stroke="var(--hot)" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M262 268H378" stroke="var(--accent)" stroke-width="2" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <path d="M200 78H150Q110 78 110 120V236" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M440 78H490Q530 78 530 120V236" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah)"/>
+        <text x="320" y="334" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="IBM Plex Sans,sans-serif">↕ I/O: data goes in from and out to the operating environment (peripherals, communication lines)</text>
+      </svg>
+      <figcaption>Control (amber) manages the other three. Data movement links the computer to the outside world.<br><span class="ar" lang="ar">التحكم (الأصفر) يدير الثلاثة الأخرى، ونقل البيانات يربط الحاسوب بالعالم الخارجي.</span></figcaption>
+    </figure>
+    <div class="note en"><span class="lab">If asked to draw:</span> draw a big box (the computer), put the 4 boxes inside, arrows from Control to the other three, arrows between storage and processing, and arrows in/out for movement.</div>
+    <div class="note ar" lang="ar"><span class="lab">لو طُلب منك الرسم:</span> ارسمي مستطيلًا كبيرًا (الحاسوب)، وضعي الأربعة مربعات بداخله، أسهم من التحكم إلى الثلاثة الباقية، وأسهم بين التخزين والمعالجة، وأسهم للداخل والخارج لنقل البيانات.</div>
+  </div>
+
+  <div class="topic hot" id="c1-comp">
+    <div class="t-head"><div><h3>3. The 4 Components &amp; Inside the CPU</h3><div class="ar-h" lang="ar">المكوّنات الأربعة وما داخل المعالج</div></div>
+      <div class="tags"><span class="tag hot">Slides 16, 17, 22</span><span class="tag">List / Define core</span></div></div>
+    <div class="answer"><span class="lab">Exam answer · Four structural components of a single-processor computer</span>
+      <div class="bi"><div class="en"><ol>
+        <li><b>CPU</b>: controls the computer and does the data processing.</li>
+        <li><b>Main memory</b>: stores data.</li>
+        <li><b>I/O</b>: moves data between the computer and the outside world.</li>
+        <li><b>System interconnection</b>: communication among CPU, memory and I/O (example: the <b>system bus</b>, a set of wires all parts attach to).</li></ol></div>
+      <div class="ar" lang="ar"><ol>
+        <li><b>المعالج CPU</b>: يتحكم بالحاسوب وينفذ معالجة البيانات.</li>
+        <li><b>الذاكرة الرئيسية (Main memory)</b>: تخزن البيانات.</li>
+        <li><b>الإدخال والإخراج (I/O)</b>: ينقل البيانات بين الحاسوب والعالم الخارجي.</li>
+        <li><b>الربط الداخلي (System interconnection)</b>: التواصل بين CPU والذاكرة وI/O (مثال: <b>ناقل النظام system bus</b>، أسلاك ترتبط بها كل الأجزاء).</li></ol></div></div></div>
+
+    <div class="sub">Picture · الشكل</div>
+    <div class="box"><b class="t">Computer</b>
+      <div class="nest c2" style="margin-bottom:10px">
+        <div class="box hotb"><b class="t">CPU</b>
+          <div class="nest c2">
+            <div class="box sm">Control Unit<br><span class="ar" lang="ar">وحدة التحكم</span></div>
+            <div class="box sm">ALU<br><span class="ar" lang="ar">وحدة الحساب والمنطق</span></div>
+            <div class="box sm">Registers<br><span class="ar" lang="ar">المسجّلات</span></div>
+            <div class="box sm">CPU interconnection<br><span class="ar" lang="ar">ربط داخل المعالج</span></div>
+          </div></div>
+        <div class="nest"><div class="box">Main memory<br><span class="ar" lang="ar">الذاكرة الرئيسية</span></div><div class="box">I/O<br><span class="ar" lang="ar">إدخال/إخراج</span></div></div>
+      </div>
+      <div class="box bus">System interconnection (System bus) · الناقل</div>
+    </div>
+
+    <div class="sub">Inside the CPU · داخل المعالج</div>
+    <div class="tw"><table>
+      <tr><th>Part</th><th class="ar" lang="ar">الوظيفة</th></tr>
+      <tr><td><b>Control unit</b> controls the operation of the CPU, so of the computer</td><td class="ar" lang="ar"><b>وحدة التحكم</b>: تتحكم بعمل المعالج وبالتالي الحاسوب</td></tr>
+      <tr><td><b>ALU</b> performs data processing (arithmetic and logic)</td><td class="ar" lang="ar"><b>ALU</b>: تنفّذ معالجة البيانات (عمليات حسابية ومنطقية)</td></tr>
+      <tr><td><b>Registers</b> storage inside the CPU</td><td class="ar" lang="ar"><b>المسجّلات</b>: تخزين داخل المعالج</td></tr>
+      <tr><td><b>CPU interconnection</b> connects control unit, ALU and registers</td><td class="ar" lang="ar"><b>ربط المعالج</b>: يوصل وحدة التحكم وALU والمسجّلات</td></tr>
+    </table></div>
+
+    <div class="sub">Core, Processor, CPU · الفرق بينها</div>
+    <div class="answer"><span class="lab">Exam definition · Core</span>
+      <div class="bi"><div class="en"><b>Core</b> = an individual processing unit on a processor chip (it has a control unit, ALU, registers and maybe cache). A core can be equal in function to a CPU in a single-CPU system.</div>
+      <div class="ar" lang="ar"><b>النواة (Core)</b> = وحدة معالجة مستقلة على شريحة المعالج (فيها وحدة تحكم وALU ومسجّلات وربما cache). النواة قد تعادل في وظيفتها معالجًا (CPU) في نظام بمعالج واحد.</div></div></div>
+    <div class="bi">
+      <div class="en"><ul>
+        <li><b>CPU</b>: the part that fetches and executes instructions (ALU + control unit + registers).</li>
+        <li><b>Processor</b>: a physical piece of silicon with <b>one or more cores</b>. With many cores it is a <b>multicore</b> processor.</li>
+        <li><b>Core parts</b>: instruction logic (fetch and decode), ALU, load/store logic (moves data to and from main memory via cache).</li></ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>CPU</b>: الجزء الذي يجلب التعليمات وينفذها (ALU + وحدة تحكم + مسجّلات).</li>
+        <li><b>المعالج (Processor)</b>: قطعة سيليكون فيزيائية فيها <b>نواة أو أكثر</b>. إذا فيه عدة أنوية فهو معالج <b>متعدد الأنوية (multicore)</b>.</li>
+        <li><b>أجزاء النواة</b>: منطق التعليمات (الجلب والفك)، ALU، منطق التحميل/التخزين (ينقل البيانات من وإلى الذاكرة عبر الكاش).</li></ul></div>
+    </div>
+  </div>
+
+  <div class="topic hot" id="c1-gen">
+    <div class="t-head"><div><h3>4. Generations of Computers</h3><div class="ar-h" lang="ar">أجيال الحواسيب</div></div>
+      <div class="tags"><span class="tag hot">Slides 26–34</span><span class="tag">Focus: 3rd gen</span></div></div>
+    <div class="note en"><span class="lab">Doctor:</span> "Focus on the third generation" (one generation question is likely: <i>describe generation 1, 2 or 3</i>). Know all three, but know the third best.</div>
+    <div class="note ar" lang="ar"><span class="lab">الدكتورة:</span> "ركّزي على الجيل الثالث" (غالبًا سؤال عن جيل واحد: <i>صفي الجيل الأول أو الثاني أو الثالث</i>). اعرفي الثلاثة، لكن الثالث الأقوى.</div>
+    <div class="tw"><table>
+      <tr><th>Gen</th><th>Technology · التقنية</th><th>Key facts · أهم المعلومات</th></tr>
+      <tr><td><b>1st</b><br>1946–1957</td><td><b>Vacuum tubes</b><br><span class="ar" lang="ar">صمامات مفرغة</span></td><td>ENIAC (first general-purpose electronic digital computer, University of Pennsylvania, WWII). Large, hot, machine language, difficult to use, magnetic tape. ENIAC: <b>decimal</b>, programmed by <b>switches</b>, <b>18,000 tubes</b>, <b>30 tons</b>, 15,000 sq ft, <b>140 kW</b>, <b>5,000 additions/sec</b>.<br><span class="ar" lang="ar">إنياك (ENIAC): أول حاسوب إلكتروني رقمي عام الأغراض. كبير، يولّد حرارة عالية، لغة الآلة، صعب الاستخدام. نظام عشري، يُبرمج بالمفاتيح، ١٨٬٠٠٠ صمام، وزنه ٣٠ طنًا، يستهلك ١٤٠ كيلوواط، ٥٠٠٠ عملية جمع في الثانية.</span></td></tr>
+      <tr><td><b>2nd</b><br>1958–1964</td><td><b>Transistors</b><br><span class="ar" lang="ar">ترانزستورات</span></td><td>Smaller, cheaper, less heat, easier to use. <b>Assembly language</b>. Magnetic tape.<br><span class="ar" lang="ar">أصغر وأرخص وحرارة أقل وأسهل استخدامًا. تستخدم <b>لغة التجميع (Assembly)</b>.</span></td></tr>
+      <tr><td><b>3rd</b><br>1965–1977<br><span class="tag hot">FOCUS</span></td><td><b>Integrated circuits (IC)</b><br><span class="ar" lang="ar">الدوائر المتكاملة</span></td><td>A single self-contained transistor is a <b>discrete component</b>. Before, equipment was built from many discrete parts (transistors, resistors, capacitors). Now they are <b>integrated in one place on one circuit = IC</b>. Result: <b>smaller and faster</b>. Small and medium scale integration: up to 100–3,000 devices on a chip.<br><span class="ar" lang="ar">الترانزستور المنفرد يسمى <b>مكوّنًا منفصلًا (discrete component)</b>. قبلها كانت الأجهزة تُبنى من عدة قطع منفصلة (ترانزستورات ومقاومات ومكثفات). في الجيل الثالث <b>دُمجت كلها في دائرة واحدة = IC</b>. النتيجة: <b>أصغر وأسرع</b>. من ١٠٠ إلى ٣٠٠٠ جهاز على الشريحة.</span></td></tr>
+    </table></div>
+    <div class="sub">Later generations · الأجيال اللاحقة</div>
+    <div class="tw"><table>
+      <tr><th>Scale</th><th>Years</th><th>Devices per chip</th></tr>
+      <tr><td>LSI (Large)</td><td>1972–1977</td><td>3,000 – 100,000</td></tr>
+      <tr><td>VLSI (Very large)</td><td>1978–1991</td><td>100,000 – 100,000,000</td></tr>
+      <tr><td>ULSI (Ultra large)</td><td>1991 – now</td><td>over 100,000,000</td></tr>
+    </table></div>
+    <div class="simple en"><span class="lab">Story to remember:</span> giant hot tubes → small cool transistors → many transistors packed into one chip → millions on a chip. Each step: smaller, faster, cheaper.</div>
+    <div class="simple ar" lang="ar"><span class="lab">قصة للحفظ:</span> صمامات ضخمة وحارة ← ترانزستورات صغيرة وباردة ← ترانزستورات كثيرة مجمعة في شريحة ← ملايين على شريحة واحدة. كل خطوة: أصغر وأسرع وأرخص.</div>
+  </div>
+
+  <div class="topic hot" id="c1-vn">
+    <div class="t-head"><div><h3>5. Von Neumann Machine (IAS)</h3><div class="ar-h" lang="ar">آلة فون نيومان</div></div>
+      <div class="tags"><span class="tag long">LONG QUESTION</span><span class="tag hot">Slides 35–41 · "very important"</span></div></div>
+    <div class="bi">
+      <div class="en"><p>Almost every modern computer has this same structure, so they are called <b>von Neumann machines</b>. Designed by mathematician <b>John von Neumann</b> (1946, completed 1952) at the <b>Princeton Institute for Advanced Studies = IAS computer</b>. Its main idea is the <b>stored program</b>: data and program live in the <b>same memory</b>, so the machine can change its own program or data.</p></div>
+      <div class="ar" lang="ar"><p>تقريبًا كل الحواسيب الحديثة لها نفس البنية، لذلك تُسمى <b>آلات فون نيومان</b>. صممها عالم الرياضيات <b>جون فون نيومان</b> (١٩٤٦، اكتملت ١٩٥٢) في <b>معهد برينستون للدراسات المتقدمة = حاسوب IAS</b>. فكرتها الأساسية <b>البرنامج المخزّن (stored program)</b>: البيانات والبرنامج في <b>نفس الذاكرة</b>، فيستطيع الجهاز تعديل برنامجه أو بياناته بنفسه.</p></div>
+    </div>
+    <div class="answer"><span class="lab">Exam answer · Three key concepts (Slide 36)</span>
+      <div class="bi"><div class="en"><ol>
+        <li><b>Data and instructions are stored</b> in a single read-write memory.</li>
+        <li>The contents of memory are <b>addressable by location</b>, regardless of the type of data in it.</li>
+        <li>Execution occurs <b>sequentially</b> (one instruction after another) unless explicitly changed.</li></ol></div>
+      <div class="ar" lang="ar"><ol>
+        <li><b>البيانات والتعليمات تُخزَّن</b> في ذاكرة واحدة للقراءة والكتابة.</li>
+        <li>محتويات الذاكرة <b>يمكن الوصول إليها بالعنوان (addressable by location)</b> بغض النظر عن نوع البيانات.</li>
+        <li>التنفيذ يحدث <b>بالتسلسل</b> (تعليمة بعد أخرى) إلا إذا تغيّر ذلك صراحةً.</li></ol></div></div>
+      <div class="en" style="font-size:14px;color:var(--muted)">Trick: <b>S-A-S</b> = Stored, Addressable, Sequential.</div></div>
+
+    <div class="answer"><span class="lab">Exam answer · What a von Neumann machine has (Slide 37)</span>
+      <div class="bi"><div class="en"><ul>
+        <li>A <b>main memory</b> storing both data and instructions.</li>
+        <li>An <b>ALU</b> that operates on binary data.</li>
+        <li>A <b>control unit</b> that interprets instructions in memory and makes them execute.</li>
+        <li><b>Input/Output (I/O)</b> equipment operated by the control unit.</li></ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>ذاكرة رئيسية</b> تخزن البيانات والتعليمات.</li>
+        <li><b>وحدة ALU</b> تعمل على البيانات الثنائية.</li>
+        <li><b>وحدة تحكم</b> تفسّر التعليمات الموجودة في الذاكرة وتجعلها تُنفَّذ.</li>
+        <li><b>معدّات إدخال/إخراج (I/O)</b> تُشغّلها وحدة التحكم.</li></ul></div></div></div>
+
+    <figure class="diag"><b class="t" style="font-family:var(--f-mono);font-size:12px;color:var(--accent)">GENERAL STRUCTURE (Slide 38)</b>
+      <svg viewBox="0 0 640 250" role="img" aria-label="Von Neumann structure: Main memory, ALU, Control unit, Input output equipment">
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)"/></marker></defs>
+        <rect x="10" y="10" width="620" height="230" rx="12" fill="none" stroke="var(--muted)" stroke-dasharray="6 5"/>
+        <text x="24" y="32" font-size="12" font-family="IBM Plex Mono,monospace" fill="var(--muted)">CENTRAL PROCESSING UNIT (CPU)</text>
+        <rect x="40" y="50" width="190" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="135" y="86" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Arithmetic-logic unit</text>
+        <rect x="40" y="150" width="190" height="60" rx="10" fill="var(--hot-soft)" stroke="var(--hot)" stroke-width="2"/><text x="135" y="186" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Program control unit</text>
+        <rect x="380" y="50" width="220" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="490" y="86" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Main memory (M)</text>
+        <rect x="380" y="150" width="220" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="490" y="186" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">Input–output equipment</text>
+        <path d="M135 150V112" stroke="var(--hot)" stroke-width="2" marker-end="url(#ah2)"/>
+        <path d="M232 80H378" stroke="var(--accent)" stroke-width="2" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+        <path d="M232 180H378" stroke="var(--hot)" stroke-width="2" marker-end="url(#ah2)"/>
+        <path d="M232 168Q300 130 378 98" fill="none" stroke="var(--hot)" stroke-width="2" marker-end="url(#ah2)"/>
+        <path d="M490 150V112" stroke="var(--accent)" stroke-width="2" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+      </svg>
+      <figcaption>Control unit tells the ALU, memory and I/O what to do.<br><span class="ar" lang="ar">وحدة التحكم تأمر ALU والذاكرة وI/O بما يفعلون.</span></figcaption></figure>
+
+    <div class="sub">IAS memory &amp; registers · ذاكرة IAS والمسجّلات</div>
+    <div class="bi">
+      <div class="en"><p>IAS memory: <b>1,000 locations</b> called <b>words</b>, each <b>40 bits</b>. A word can hold data, or <b>two 20-bit instructions</b>, each with an <b>8-bit opcode</b> and a <b>12-bit address</b>.</p></div>
+      <div class="ar" lang="ar"><p>ذاكرة IAS: <b>١٠٠٠ موقع</b> تسمى <b>كلمات (words)</b>، كل واحدة <b>٤٠ بت</b>. الكلمة تحمل بيانات أو <b>تعليمتين كل واحدة ٢٠ بت</b>، وكل تعليمة فيها <b>opcode من ٨ بت</b> و<b>عنوان من ١٢ بت</b>.</p></div>
+    </div>
+    <div class="tw"><table class="reg">
+      <tr><th>Register</th><th>Meaning · المعنى</th></tr>
+      <tr><td>MBR</td><td>Memory Buffer Register: holds a word to be stored in memory or sent to I/O (or just read).<br><span class="ar" lang="ar">يحمل الكلمة المراد تخزينها في الذاكرة أو إرسالها لـ I/O (أو المقروءة للتو).</span></td></tr>
+      <tr><td>MAR</td><td>Memory Address Register: the address in memory of the word to be written from or read into MBR.<br><span class="ar" lang="ar">يحدد عنوان الكلمة في الذاكرة المراد قراءتها أو الكتابة منها.</span></td></tr>
+      <tr><td>IR</td><td>Instruction Register: holds the 8-bit opcode of the instruction being executed.<br><span class="ar" lang="ar">يحمل opcode (٨ بت) للتعليمة الجاري تنفيذها.</span></td></tr>
+      <tr><td>IBR</td><td>Instruction Buffer Register: temporarily holds the right-hand instruction of a word.<br><span class="ar" lang="ar">يحتفظ مؤقتًا بالتعليمة اليمنى من الكلمة.</span></td></tr>
+      <tr><td>PC</td><td>Program Counter: address of the <b>next</b> instruction to fetch.<br><span class="ar" lang="ar">عنوان التعليمة <b>التالية</b> المراد جلبها.</span></td></tr>
+      <tr><td>AC &amp; MQ</td><td>Accumulator and Multiplier-Quotient: temporarily hold ALU operands and results.<br><span class="ar" lang="ar">المجمّع وحاصل الضرب/القسمة: يحتفظان مؤقتًا بمدخلات ونتائج ALU.</span></td></tr>
+    </table></div>
+  </div>
+
+  <div class="topic" id="c1-misc">
+    <div class="t-head"><div><h3>6. Multicore, Moore's Law &amp; Intel x86</h3><div class="ar-h" lang="ar">متعدد الأنوية، قانون مور، وإنتل</div></div>
+      <div class="tags"><span class="tag">Low priority</span><span class="tag hot">Appeared in a sample paper: know the 4 consequences</span></div></div>
+    <div class="bi">
+      <div class="en"><ul>
+        <li><b>Multicore</b>: many processing units (cores) on one chip.</li>
+        <li><b>Moore's law</b> (Gordon Moore, co-founder of Intel): number of transistors on a chip doubles about every year. Consequences: cost ↓, size ↓, performance ↑, power consumption ↓.</li>
+        <li><b>8086</b>: 16-bit, wider data path, instruction queue (prefetch).</li>
+        <li><b>Pentium</b>: superscalar (several instructions in parallel).</li>
+        <li><b>Core</b>: first Intel x86 dual core. <b>Core 2</b>: 64-bit; Quad = 4 cores. AVX = 256 then 512-bit vector instructions.</li></ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>متعدد الأنوية (Multicore)</b>: عدة وحدات معالجة (أنوية) على شريحة واحدة.</li>
+        <li><b>قانون مور</b> (جوردون مور، شريك مؤسس لإنتل): عدد الترانزستورات على الشريحة يتضاعف تقريبًا كل سنة. النتائج: التكلفة ↓، الحجم ↓، الأداء ↑، استهلاك الطاقة ↓.</li>
+        <li><b>8086</b>: ١٦ بت، مسار بيانات أعرض، طابور تعليمات (جلب مسبق).</li>
+        <li><b>Pentium</b>: superscalar (عدة تعليمات بالتوازي).</li>
+        <li><b>Core</b>: أول معالج x86 ثنائي النواة. <b>Core 2</b>: ٦٤ بت؛ Quad = ٤ أنوية. AVX = تعليمات متجهة ٢٥٦ ثم ٥١٢ بت.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CH2 ===================== -->
+<section class="pane" id="p-ch2">
+
+  <div class="topic hot" id="c2-comp">
+    <div class="t-head"><div><h3>1. Computer Components &amp; Software</h3><div class="ar-h" lang="ar">مكوّنات الحاسوب والبرمجيات</div></div>
+      <div class="tags"><span class="tag hot">3 von Neumann concepts again</span></div></div>
+    <div class="bi">
+      <div class="en"><p>Same three von Neumann concepts as Chapter 1: <b>stored data+instructions</b>, <b>addressable memory</b>, <b>sequential execution</b>. Learn them once, use them in both chapters.</p>
+      <p><b>Hardwired program</b>: connecting components in a fixed configuration is a form of programming; the "program" is the hardware. Changing it means rewiring.</p>
+      <p><b>Software</b>: a sequence of codes or instructions. Part of the hardware reads each instruction and produces <b>control signals</b>. New program = new codes, no rewiring.</p></div>
+      <div class="ar" lang="ar"><p>نفس مفاهيم فون نيومان الثلاثة في الفصل الأول: <b>بيانات وتعليمات مخزّنة</b>، <b>ذاكرة قابلة للعنونة</b>، <b>تنفيذ تسلسلي</b>. احفظيها مرة وحدة وتنفعك في الفصلين.</p>
+      <p><b>البرنامج المربوط بالعتاد (Hardwired program)</b>: توصيل المكوّنات بترتيب ثابت هو نوع من البرمجة، و"البرنامج" هو العتاد نفسه. تغييره يعني إعادة التوصيل.</p>
+      <p><b>البرمجيات (Software)</b>: سلسلة رموز أو تعليمات. جزء من العتاد يقرأ كل تعليمة ويولّد <b>إشارات تحكم (control signals)</b>. برنامج جديد = رموز جديدة بدون إعادة توصيل.</p></div>
+    </div>
+    <div class="sub">Major components · المكوّنات الرئيسية</div>
+    <div class="bi">
+      <div class="en"><ul>
+        <li><b>CPU</b>: instruction interpreter + module of general-purpose arithmetic and logic functions.</li>
+        <li><b>I/O</b>: input module (accepts data and instructions, converts them to internal signals) and output module (reports results).</li>
+        <li><b>Memory (main memory)</b>: stores instructions and data.</li></ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>CPU</b>: مفسّر تعليمات + وحدة وظائف حسابية ومنطقية عامة.</li>
+        <li><b>I/O</b>: وحدة إدخال (تستقبل البيانات والتعليمات وتحولها لإشارات داخلية) ووحدة إخراج (تعرض النتائج).</li>
+        <li><b>الذاكرة (Main memory)</b>: تخزن التعليمات والبيانات.</li></ul></div>
+    </div>
+    <div class="sub">The four registers that talk to memory and I/O · أربع مسجّلات للتواصل</div>
+    <div class="tw"><table class="reg">
+      <tr><td>MAR</td><td>address in memory for the next read/write · عنوان القراءة/الكتابة التالية</td></tr>
+      <tr><td>MBR</td><td>data to be written, or data just read · البيانات المراد كتابتها أو التي قُرئت</td></tr>
+      <tr><td>I/O AR</td><td>specifies a particular I/O device · يحدد جهاز I/O معيّن</td></tr>
+      <tr><td>I/O BR</td><td>exchanges data between I/O module and CPU · تبادل البيانات بين وحدة I/O والمعالج</td></tr>
+      <tr><td>PC / IR</td><td>PC = address of next instruction · IR = instruction now being executed · عنوان التعليمة التالية / التعليمة الحالية</td></tr>
+    </table></div>
+  </div>
+
+  <div class="topic hot" id="c2-cycle">
+    <div class="t-head"><div><h3>2. Instruction Cycle (Fetch &amp; Execute)</h3><div class="ar-h" lang="ar">دورة التعليمة</div></div>
+      <div class="tags"><span class="tag long">LONG ANSWER · 4 MARKS</span><span class="tag hot">"Very important"</span></div></div>
+    <div class="bi">
+      <div class="en"><p>The basic job of a computer is <b>executing programs</b>. The processing needed for <b>one instruction</b> is called an <b>instruction cycle</b>, and it has two steps: <b>Fetch</b> then <b>Execute</b>. The processor repeats this loop for every instruction until the program ends.</p></div>
+      <div class="ar" lang="ar"><p>وظيفة الحاسوب الأساسية <b>تنفيذ البرامج</b>. المعالجة اللازمة <b>لتعليمة واحدة</b> تسمى <b>دورة التعليمة (instruction cycle)</b>، ولها خطوتان: <b>جلب (Fetch)</b> ثم <b>تنفيذ (Execute)</b>. يكرر المعالج هذه الحلقة لكل تعليمة إلى أن ينتهي البرنامج.</p></div>
+    </div>
+
+    <div class="sub">Try it yourself · جرّبيها بنفسك (press Next)</div>
+    <div class="sim" id="sim">
+      <div class="phase" id="phase"><span data-p="fetch">FETCH</span><span data-p="exec">EXECUTE</span><span data-p="int">INTERRUPT CHECK</span></div>
+      <div class="regs" id="regs"></div>
+      <div class="memtab"><span>M[300] = 1940 <i style="font-style:normal">(LOAD AC ← M[940])</i></span><span>M[301] = 5941</span><span>M[940] = 0003</span></div>
+      <div class="stepbox" style="margin-top:12px"><div class="n" id="sn"></div><div class="what" id="sw"></div><div class="en" id="sde" style="font-size:14.5px"></div><div class="ar" id="sda" lang="ar" style="font-size:14.5px"></div></div>
+      <div class="ctrls">
+        <button class="btn ghost" id="sback">← Back</button>
+        <button class="btn" id="snext">Next →</button>
+        <button class="btn ghost" id="sreset">Reset</button>
+        <label class="toggle"><input type="checkbox" id="sint"> Pretend an interrupt is pending <span class="ar" lang="ar">(افترض وجود مقاطعة)</span></label>
+      </div>
+    </div>
+
+    <div class="answer"><span class="lab">Exam answer · Instruction cycle (write this)</span>
+      <div class="bi"><div class="en">
+        <p><b>Definition:</b> the processing required for a single instruction. It has two steps.</p>
+        <p><b>1. Fetch cycle</b></p>
+        <ul><li>At the start of each cycle the processor <b>fetches an instruction from memory</b>.</li>
+        <li>The <b>Program Counter (PC)</b> holds the address of the next instruction.</li>
+        <li>After each fetch the processor <b>increments the PC</b> so the next fetch gets the next instruction in sequence.</li>
+        <li>The fetched instruction is loaded into the <b>Instruction Register (IR)</b>.</li></ul>
+        <p><b>2. Execute cycle</b>: the processor interprets the instruction in IR and performs the action. Four categories:</p>
+        <ul><li><b>Processor–memory</b>: transfer data CPU↔memory.</li>
+        <li><b>Processor–I/O</b>: transfer data to/from a peripheral via an I/O module.</li>
+        <li><b>Data processing</b>: an arithmetic or logic operation.</li>
+        <li><b>Control</b>: change the sequence of execution (e.g. instruction at 149 says "next from 182", so PC is set to 182 and the next fetch comes from 182, not 150).</li></ul></div>
+      <div class="ar" lang="ar">
+        <p><b>التعريف:</b> المعالجة اللازمة لتعليمة واحدة، وفيها خطوتان.</p>
+        <p><b>١. دورة الجلب (Fetch)</b></p>
+        <ul><li>في بداية كل دورة <b>يجلب المعالج تعليمة من الذاكرة</b>.</li>
+        <li><b>عداد البرنامج (PC)</b> يحمل عنوان التعليمة التالية.</li>
+        <li>بعد كل جلب <b>يزيد المعالج قيمة PC</b> ليجلب في المرة القادمة التعليمة التالية بالتسلسل.</li>
+        <li>التعليمة المجلوبة تُحمَّل في <b>مسجّل التعليمات (IR)</b>.</li></ul>
+        <p><b>٢. دورة التنفيذ (Execute)</b>: يفسّر المعالج التعليمة الموجودة في IR وينفّذ الإجراء. أربعة أنواع:</p>
+        <ul><li><b>معالج–ذاكرة</b>: نقل بيانات بين المعالج والذاكرة.</li>
+        <li><b>معالج–I/O</b>: نقل بيانات من/إلى جهاز طرفي عبر وحدة I/O.</li>
+        <li><b>معالجة بيانات</b>: عملية حسابية أو منطقية.</li>
+        <li><b>تحكم (Control)</b>: تغيير تسلسل التنفيذ (مثال: التعليمة في ١٤٩ تقول "التالية من ١٨٢"، فيصبح PC = ١٨٢ وتُجلب التعليمة التالية من ١٨٢ بدل ١٥٠).</li></ul></div></div>
+      <div class="en" style="font-size:14px;color:var(--muted)">Memory trick for the loop: <b>F-D-E</b> = Fetch → Decode → Execute (the slides say Fetch / Execute; decoding happens when the processor "interprets" the instruction).</div>
+    </div>
+  </div>
+
+  <div class="topic" id="c2-int">
+    <div class="t-head"><div><h3>3. Interrupts &amp; the Interrupt Cycle</h3><div class="ar-h" lang="ar">المقاطعات</div></div>
+      <div class="tags"><span class="tag">Part of the instruction cycle slides</span></div></div>
+    <div class="bi">
+      <div class="en"><p><b>Interrupt:</b> a condition that makes the processor <b>temporarily work on another task</b> and then <b>return</b> to what it was doing.</p>
+      <p><b>Interrupt cycle</b> is added after execute. The processor checks for an interrupt signal:</p>
+      <ul><li><b>None pending</b> → go to fetch the next instruction of the current program.</li>
+      <li><b>Pending</b> → (1) suspend the current program, (2) <b>save its context</b> (the PC value and other relevant data), (3) set PC to the <b>start address of the interrupt handler</b> routine.</li></ul>
+      <p><b>Multiple interrupts:</b> if several occur, the system uses <b>priorities</b>: the highest priority is served first, then the rest in turn.</p></div>
+      <div class="ar" lang="ar"><p><b>المقاطعة (Interrupt):</b> حالة تجعل المعالج <b>يعمل مؤقتًا على مهمة أخرى</b> ثم <b>يعود</b> لما كان يفعله.</p>
+      <p><b>دورة المقاطعة (Interrupt cycle)</b> تُضاف بعد التنفيذ. يفحص المعالج وجود إشارة مقاطعة:</p>
+      <ul><li><b>لا توجد</b> ← يذهب لجلب التعليمة التالية من البرنامج الحالي.</li>
+      <li><b>توجد</b> ← (١) يوقف البرنامج الحالي، (٢) <b>يحفظ سياقه (context)</b> (قيمة PC وبيانات أخرى مهمة)، (٣) يضع في PC <b>عنوان بداية روتين معالجة المقاطعة (interrupt handler)</b>.</li></ul>
+      <p><b>مقاطعات متعددة:</b> إذا حدثت عدة مقاطعات يستخدم النظام <b>الأولويات</b>: الأعلى أولوية تُخدَّم أولًا ثم الباقي بالترتيب.</p></div>
+    </div>
+    <div class="sub">4 classes of interrupt · أنواع المقاطعات</div>
+    <div class="tw"><table>
+      <tr><th>Class</th><th>Meaning</th><th class="ar" lang="ar">المعنى</th></tr>
+      <tr><td><b>Program</b></td><td>result of instruction execution, e.g. divide by zero</td><td class="ar" lang="ar">ناتجة عن تنفيذ تعليمة، مثل القسمة على صفر</td></tr>
+      <tr><td><b>Timer</b></td><td>from a timer inside the processor; lets the OS do things regularly</td><td class="ar" lang="ar">من مؤقت داخل المعالج؛ تسمح لنظام التشغيل بعمل مهام دورية</td></tr>
+      <tr><td><b>I/O</b></td><td>from an I/O controller: normal completion or an error</td><td class="ar" lang="ar">من متحكم I/O: انتهاء عادي للعملية أو خطأ</td></tr>
+      <tr><td><b>Hardware failure</b></td><td>e.g. power failure, memory parity error</td><td class="ar" lang="ar">مثل انقطاع الطاقة أو خطأ التكافؤ في الذاكرة</td></tr>
+    </table></div>
+    <div class="note en"><span class="lab">Memory trick:</span> <b>P-T-I-H</b> = Program, Timer, I/O, Hardware.</div>
+  </div>
+
+  <div class="topic hot" id="c2-bus">
+    <div class="t-head"><div><h3>4. Interconnection &amp; the Bus</h3><div class="ar-h" lang="ar">الربط الداخلي والناقل</div></div>
+      <div class="tags"><span class="tag hot">"Focus on bus"</span><span class="tag">Short / list</span></div></div>
+    <div class="bi">
+      <div class="en"><p><b>Interconnection structure</b> = the collection of paths connecting the modules (CPU, memory, I/O). A computer is basically a <b>network of three module types</b>.</p>
+      <ul><li><b>Memory</b>: N words, each with a unique address (0 … N−1); read or write controlled by control signals.</li>
+      <li><b>I/O module</b>: like memory (read/write), but can control several devices via <b>ports</b> (each with an address) and can send <b>interrupt signals</b>.</li>
+      <li><b>CPU</b>: reads instructions and data, writes data after processing, uses control signals, receives interrupts.</li></ul></div>
+      <div class="ar" lang="ar"><p><b>هيكل الربط (Interconnection structure)</b> = مجموعة المسارات التي توصل الوحدات (CPU، ذاكرة، I/O). الحاسوب في الأساس <b>شبكة من ثلاثة أنواع وحدات</b>.</p>
+      <ul><li><b>الذاكرة</b>: N كلمة، لكل واحدة عنوان فريد (٠ … N−١)؛ القراءة أو الكتابة تحددها إشارات التحكم.</li>
+      <li><b>وحدة I/O</b>: تشبه الذاكرة (قراءة/كتابة) لكنها تتحكم بعدة أجهزة عبر <b>منافذ (ports)</b> (لكل منفذ عنوان) وترسل <b>إشارات مقاطعة</b>.</li>
+      <li><b>CPU</b>: يقرأ التعليمات والبيانات، يكتب البيانات بعد المعالجة، يستخدم إشارات التحكم، ويستقبل المقاطعات.</li></ul></div>
+    </div>
+    <div class="sub">5 types of transfers · خمسة أنواع من النقل</div>
+    <div class="bi">
+      <div class="en"><ol><li>Memory → processor (read instruction/data)</li><li>Processor → memory (write data)</li><li>I/O → processor</li><li>Processor → I/O</li><li>I/O ↔ memory directly, <b>without the processor</b> = <b>DMA</b> (direct memory access)</li></ol></div>
+      <div class="ar" lang="ar"><ol><li>ذاكرة ← معالج (قراءة تعليمة/بيانات)</li><li>معالج ← ذاكرة (كتابة بيانات)</li><li>I/O ← معالج</li><li>معالج ← I/O</li><li>I/O ↔ ذاكرة مباشرة <b>بدون المعالج</b> = <b>DMA</b> (الوصول المباشر للذاكرة)</li></ol></div>
+    </div>
+
+    <div class="answer"><span class="lab">Exam answer · Bus &amp; its three types</span>
+      <div class="bi"><div class="en">
+        <p>A <b>bus</b> is a communication pathway connecting two or more devices. It is a <b>shared transmission medium</b>: a signal sent by one device can be received by all others. If two devices transmit at the same time, signals overlap and are garbled, so <b>only one device can transmit at a time</b>.</p>
+        <ul><li><b>Data bus</b>: carries data / instructions.</li>
+        <li><b>Address bus</b>: identifies the source or destination of data.</li>
+        <li><b>Control bus</b>: memory read/write signals, interrupt requests, clock signals.</li></ul></div>
+      <div class="ar" lang="ar">
+        <p><b>الناقل (Bus)</b> هو مسار اتصال يربط جهازين أو أكثر. وهو <b>وسط نقل مشترك</b>: الإشارة التي يرسلها جهاز يستقبلها كل الأجهزة الأخرى. لو أرسل جهازان في نفس الوقت تتداخل الإشارات وتتشوّه، لذلك <b>جهاز واحد فقط يرسل في الوقت الواحد</b>.</p>
+        <ul><li><b>ناقل البيانات (Data bus)</b>: يحمل البيانات / التعليمات.</li>
+        <li><b>ناقل العناوين (Address bus)</b>: يحدد مصدر أو وجهة البيانات.</li>
+        <li><b>ناقل التحكم (Control bus)</b>: إشارات قراءة/كتابة الذاكرة، طلبات المقاطعة، إشارات الساعة (clock).</li></ul></div></div></div>
+    <div class="box"><b class="t">System bus</b>
+      <div class="nest c4" style="margin-bottom:10px">
+        <div class="box sm">CPU</div><div class="box sm">Memory</div><div class="box sm">I/O</div><div class="box sm">I/O</div></div>
+      <div class="box bus" style="margin-bottom:6px">Data bus — data &amp; instructions · البيانات</div>
+      <div class="box bus" style="margin-bottom:6px">Address bus — where from / to · العناوين</div>
+      <div class="box bus">Control bus — read/write, interrupt, clock · التحكم</div>
+    </div>
+    <div class="simple en"><span class="lab">Think of it as a school bus (or a one-lane road):</span> everyone can see who's on it, but only one person can speak into the microphone at a time. Data bus = the passengers, address bus = the destination sign, control bus = the driver's signals.</div>
+    <div class="simple ar" lang="ar"><span class="lab">تخيلي حافلة مدرسة (أو طريق بمسار واحد):</span> الكل يسمع، لكن شخص واحد فقط يتكلم بالميكروفون كل مرة. ناقل البيانات = الركاب، ناقل العناوين = لوحة الوجهة، ناقل التحكم = إشارات السائق.</div>
+  </div>
+</section>
+
+<!-- ===================== CH3 ===================== -->
+<section class="pane" id="p-ch3">
+
+  <div class="topic hot" id="c3-char">
+    <div class="t-head"><div><h3>1. Key Characteristics &amp; Access Methods</h3><div class="ar-h" lang="ar">الخصائص وطرق الوصول</div></div>
+      <div class="tags"><span class="tag hot">Sequential access</span><span class="tag">Choose / short</span></div></div>
+    <div class="bi">
+      <div class="en"><p>Seven characteristics describe any memory system: <b>Location, Capacity, Unit of transfer, Access method, Performance, Physical type, Physical characteristics &amp; organization</b>.</p>
+      <ul><li><b>Location</b>: <i>internal</i> (registers, main memory, cache) or <i>external</i> (disk, tape, flash drive).</li>
+      <li><b>Capacity</b>: in bytes (1 byte = 8 bits) or words (8, 16, 32 bits).</li>
+      <li><b>Unit of transfer</b>: number of bits read or written at once (a word or a block).</li></ul></div>
+      <div class="ar" lang="ar"><p>سبع خصائص تصف أي نظام ذاكرة: <b>الموقع، السعة، وحدة النقل، طريقة الوصول، الأداء، النوع الفيزيائي، الخصائص الفيزيائية والتنظيم</b>.</p>
+      <ul><li><b>الموقع (Location)</b>: <i>داخلية</i> (مسجّلات، ذاكرة رئيسية، كاش) أو <i>خارجية</i> (قرص، شريط، فلاش).</li>
+      <li><b>السعة (Capacity)</b>: بالبايت (١ بايت = ٨ بت) أو بالكلمات (٨ أو ١٦ أو ٣٢ بت).</li>
+      <li><b>وحدة النقل (Unit of transfer)</b>: عدد البتات المقروءة أو المكتوبة دفعة واحدة (كلمة أو كتلة).</li></ul></div>
+    </div>
+    <div class="answer"><span class="lab">Exam answer · The 3 access methods</span>
+      <div class="tw" style="background:var(--surface)"><table>
+        <tr><th>Method</th><th>How it works</th><th class="ar" lang="ar">طريقة العمل</th></tr>
+        <tr><td><b>Sequential</b><br><span class="tag hot">DOCTOR'S PICK</span></td><td>Data is retrieved <b>in the same order it was stored</b>. Records in a linear sequence; the read-write head passes every record in between. Access time is highly variable. Example: <b>tape</b>.</td><td class="ar" lang="ar">تُسترجع البيانات <b>بنفس ترتيب تخزينها</b>. سجلات بتسلسل خطي؛ رأس القراءة يمرّ بكل سجل في الطريق. زمن الوصول متغيّر جدًا. مثال: <b>الشريط</b>.</td></tr>
+        <tr><td><b>Direct</b></td><td>Shared read-write head, but each block has a <b>unique address by physical location</b>: jump to the general area, then search sequentially. Example: <b>disk</b>.</td><td class="ar" lang="ar">رأس قراءة مشترك، لكن لكل كتلة <b>عنوان فريد حسب موقعها الفيزيائي</b>: تقفز للمنطقة العامة ثم تبحث تسلسليًا. مثال: <b>القرص</b>.</td></tr>
+        <tr><td><b>Random</b></td><td>Each location has a <b>unique, wired-in address</b>. Access time is <b>constant</b> and independent of previous accesses. Example: <b>main memory</b>, some caches.</td><td class="ar" lang="ar">لكل موقع <b>عنوان فريد مربوط بالعتاد</b>. زمن الوصول <b>ثابت</b> ولا يعتمد على الوصولات السابقة. مثال: <b>الذاكرة الرئيسية</b> وبعض أنواع الكاش.</td></tr>
+      </table></div></div>
+    <div class="simple en"><span class="lab">Think of:</span> sequential = a cassette tape (listen from the start to reach song 5); direct = a CD (jump near song 5, then fine-tune); random = a playlist on your phone (tap any song instantly).</div>
+    <div class="simple ar" lang="ar"><span class="lab">تخيلي:</span> التسلسلي = شريط كاسيت (تسمعين من البداية لين توصلين الأغنية ٥)؛ المباشر = اسطوانة CD (تقفزين قرب الأغنية ٥ ثم تضبطين)؛ العشوائي = قائمة على جوالك (تضغطين أي أغنية فورًا).</div>
+
+    <div class="sub">Performance · الأداء</div>
+    <div class="bi">
+      <div class="en"><ul>
+        <li><b>Access time (latency)</b>: time to perform a read or write (address presented → data available). For non-random memory: time to position the read-write mechanism.</li>
+        <li><b>Memory cycle time</b> = access time + extra time before the next access can start.</li>
+        <li><b>Transfer rate</b>: rate data moves in or out. For random-access memory: <span class="mono">Tr = 1 / cycle time</span>.</li></ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>زمن الوصول (Access time / latency)</b>: الزمن لتنفيذ قراءة أو كتابة (من تقديم العنوان إلى توفر البيانات). في الذاكرة غير العشوائية: زمن وضع آلية القراءة/الكتابة في الموقع.</li>
+        <li><b>زمن دورة الذاكرة (Cycle time)</b> = زمن الوصول + زمن إضافي قبل بدء الوصول التالي.</li>
+        <li><b>معدل النقل (Transfer rate)</b>: سرعة دخول/خروج البيانات. للذاكرة العشوائية: <span class="mono">Tr = 1 / cycle time</span>.</li></ul></div>
+    </div>
+  </div>
+
+  <div class="topic hot" id="c3-hier">
+    <div class="t-head"><div><h3>2. Memory Hierarchy</h3><div class="ar-h" lang="ar">هرم الذاكرة</div></div>
+      <div class="tags"><span class="tag hot">"If you go down, what happens?"</span><span class="tag">Choose / direction</span></div></div>
+    <div class="bi">
+      <div class="en"><p>Memory is organised in layers. <b>Top (closest to the processor): registers</b> → cache (L1, L2, L3) → main memory (DRAM) → hard disk → optical disk and tape. The first three are <b>internal</b>; the rest are <b>external</b>.</p></div>
+      <div class="ar" lang="ar"><p>الذاكرة مرتبة في طبقات. <b>الأعلى (الأقرب للمعالج): المسجّلات (registers)</b> ← الكاش (L1, L2, L3) ← الذاكرة الرئيسية (DRAM) ← القرص الصلب ← الأقراص الضوئية والشريط. أول ثلاثة <b>داخلية</b> والباقي <b>خارجية</b>.</p></div>
+    </div>
+    <div class="sub">Click a level · اضغطي على طبقة</div>
+    <div class="hhead"><span>Level</span><span>Speed</span><span>Cost / bit</span><span>Capacity</span></div>
+    <div class="hier" id="hier"></div>
+    <div class="answer" id="hierans"></div>
+    <div class="answer"><span class="lab">Exam answer · As you go DOWN the hierarchy</span>
+      <div class="bi"><div class="en"><ul>
+        <li><b>Cost per bit decreases</b> (cheaper)</li>
+        <li><b>Capacity increases</b> (bigger)</li>
+        <li><b>Access time increases</b> (slower)</li>
+        <li><b>Frequency of access by the processor decreases</b></li></ul>
+        <p>The key to success is the last one: the CPU mostly finds what it needs in the fast upper levels.</p></div>
+      <div class="ar" lang="ar"><ul>
+        <li><b>التكلفة لكل بت تنقص</b> (أرخص)</li>
+        <li><b>السعة تزيد</b> (أكبر)</li>
+        <li><b>زمن الوصول يزيد</b> (أبطأ)</li>
+        <li><b>تكرار وصول المعالج للذاكرة ينقص</b></li></ul>
+        <p>مفتاح النجاح هو الأخير: المعالج غالبًا يجد ما يحتاجه في الطبقات العليا السريعة.</p></div></div>
+      <div class="en" style="font-size:14px;color:var(--muted)">Quick rule: <b>Faster = costs more · Bigger = costs less · Bigger = slower.</b></div></div>
+  </div>
+
+  <div class="topic hot" id="c3-cache">
+    <div class="t-head"><div><h3>3. Cache Memory &amp; Its Principles</h3><div class="ar-h" lang="ar">الذاكرة المخبئية (الكاش) ومبادئها</div></div>
+      <div class="tags"><span class="tag hot">Slide 14 · "very important"</span></div></div>
+    <div class="bi">
+      <div class="en"><p><b>Cache:</b> a small amount of <b>fast</b> memory between the CPU and main memory. It may be on the CPU chip. It holds <b>frequently used data</b> so access speed approaches register speed, while the total memory stays large and cheap.</p></div>
+      <div class="ar" lang="ar"><p><b>الكاش (Cache):</b> كمية صغيرة من الذاكرة <b>السريعة</b> بين المعالج والذاكرة الرئيسية. قد تكون على شريحة المعالج. تحتفظ بـ<b>البيانات الأكثر استخدامًا</b> فتقترب سرعة الوصول من سرعة المسجّلات، مع بقاء الذاكرة الكلية كبيرة ورخيصة.</p></div>
+    </div>
+    <div class="answer"><span class="lab">Exam answer · Cache principle (how a read works)</span>
+      <div class="bi"><div class="en"><ol>
+        <li>The cache contains a <b>copy of portions of main memory</b>.</li>
+        <li>When the processor reads a word, the system <b>checks if it is in the cache</b>.</li>
+        <li><b>If yes (hit)</b>: the word is delivered to the processor.</li>
+        <li><b>If no (miss)</b>: a <b>block</b> of main memory (a fixed number of words) is read into the cache, <b>then</b> the word is delivered to the processor.</li></ol>
+        <p>Multi-level: <b>L1</b> (fastest, smallest), <b>L2</b> (slower, larger), <b>L3</b> (slower, larger still).</p></div>
+      <div class="ar" lang="ar"><ol>
+        <li>الكاش يحتوي <b>نسخة من أجزاء من الذاكرة الرئيسية</b>.</li>
+        <li>عندما يقرأ المعالج كلمة، يتحقق النظام <b>هل هي موجودة في الكاش</b>.</li>
+        <li><b>إن وُجدت (hit)</b>: تُسلَّم الكلمة للمعالج.</li>
+        <li><b>إن لم توجد (miss)</b>: تُقرأ <b>كتلة (block)</b> من الذاكرة الرئيسية (عدد ثابت من الكلمات) إلى الكاش، <b>ثم</b> تُسلَّم الكلمة للمعالج.</li></ol>
+        <p>متعدد المستويات: <b>L1</b> (الأسرع والأصغر)، <b>L2</b> (أبطأ وأكبر)، <b>L3</b> (أبطأ وأكبر أيضًا).</p></div></div></div>
+    <div class="simple en"><span class="lab">Think of:</span> your desk (cache) vs the library (main memory). You keep the books you're using on the desk. If the book isn't there (miss), you bring the whole shelf section (block) from the library.</div>
+    <div class="simple ar" lang="ar"><span class="lab">تخيلي:</span> مكتبك (الكاش) مقابل المكتبة (الذاكرة الرئيسية). تحتفظين على المكتب بالكتب التي تستخدمينها. إذا الكتاب مو موجود (miss)، تجيبين قسم الرف كامل (block) من المكتبة.</div>
+
+    <div class="sub">Cache / main memory structure · البنية</div>
+    <div class="bi">
+      <div class="en"><ul>
+        <li>Main memory has up to <span class="mono">2ⁿ</span> words, each with a unique <b>n-bit address</b>.</li>
+        <li>It is viewed as <b>blocks of K words</b>: <span class="mono">M = 2ⁿ / K</span> blocks.</li>
+        <li>The cache has <b>m lines</b> (m is much smaller than M). Each <b>line</b> = K words + a <b>tag</b> + control bits (e.g. a bit showing whether the line was modified).</li>
+        <li>Because there are more blocks than lines, each line has a <b>tag</b> that says which block is currently stored there (the tag is part of the main memory address).</li></ul></div>
+      <div class="ar" lang="ar"><ul>
+        <li>الذاكرة الرئيسية فيها حتى <span class="mono">2ⁿ</span> كلمة، لكل واحدة <b>عنوان من n بت</b>.</li>
+        <li>تُعتبر <b>كتلًا من K كلمة</b>: <span class="mono">M = 2ⁿ / K</span> كتلة.</li>
+        <li>الكاش فيه <b>m سطر (line)</b> (m أصغر بكثير من M). كل <b>سطر</b> = K كلمة + <b>وسم (tag)</b> + بتات تحكم (مثلًا بت يبيّن هل عُدّل السطر).</li>
+        <li>لأن الكتل أكثر من الأسطر، كل سطر له <b>tag</b> يحدد أي كتلة مخزنة فيه حاليًا (والـ tag جزء من عنوان الذاكرة الرئيسية).</li></ul></div>
+    </div>
+  </div>
+
+  <div class="topic hot" id="c3-addr">
+    <div class="t-head"><div><h3>4. Cache Design Elements: Address, Size</h3><div class="ar-h" lang="ar">عناصر تصميم الكاش</div></div>
+      <div class="tags"><span class="tag hot">Logical vs Physical</span><span class="tag">Define</span></div></div>
+    <div class="bi">
+      <div class="en"><p>Four design elements classify cache designs: <b>Cache addresses (logical or physical), Cache size, Mapping, Replacement algorithm.</b></p></div>
+      <div class="ar" lang="ar"><p>أربعة عناصر تصنّف تصاميم الكاش: <b>عناوين الكاش (منطقي أو فيزيائي)، حجم الكاش، التخطيط (Mapping)، خوارزمية الاستبدال.</b></p></div>
+    </div>
+    <div class="answer"><span class="lab">Exam answer · Logical vs physical cache</span>
+      <div class="tw" style="background:var(--surface)"><table>
+        <tr><th></th><th>Logical (virtual) cache</th><th>Physical cache</th></tr>
+        <tr><td><b>Stores data using</b></td><td><b>Virtual addresses</b></td><td>Main-memory <b>physical addresses</b></td></tr>
+        <tr><td><b>Placed</b></td><td><b>Between the processor and the MMU</b>. The processor accesses the cache directly, without going through the MMU</td><td><b>Between the MMU and main memory</b></td></tr>
+        <tr><td class="ar" lang="ar"><b>بالعربي</b></td><td class="ar" lang="ar">يخزن باستخدام <b>العناوين الافتراضية</b>؛ يقع <b>بين المعالج وMMU</b>؛ المعالج يصل إليه مباشرة بدون MMU</td><td class="ar" lang="ar">يخزن باستخدام <b>العناوين الفيزيائية</b> للذاكرة الرئيسية؛ يقع <b>بين MMU والذاكرة الرئيسية</b></td></tr>
+      </table></div>
+      <div class="bi"><div class="en">Background: <b>virtual memory</b> lets programs use addresses without regard to how much physical memory exists. The <b>MMU</b> (memory management unit) translates each virtual address into a physical address.</div>
+      <div class="ar" lang="ar">خلفية: <b>الذاكرة الافتراضية</b> تسمح للبرامج باستخدام عناوين دون النظر لحجم الذاكرة الفيزيائية. وحدة <b>MMU</b> (إدارة الذاكرة) تترجم كل عنوان افتراضي إلى عنوان فيزيائي.</div></div></div>
+    <div class="bi">
+      <div class="en"><p><b>Cache size:</b> small enough that the average cost per bit is close to main memory alone, and large enough that the average access time is close to the cache alone.</p></div>
+      <div class="ar" lang="ar"><p><b>حجم الكاش:</b> صغير بما يكفي لتبقى التكلفة المتوسطة لكل بت قريبة من الذاكرة الرئيسية، وكبير بما يكفي لتقترب مدة الوصول المتوسطة من مدة الكاش.</p></div>
+    </div>
+  </div>
+
+  <div class="topic" id="c3-map">
+    <div class="t-head"><div><h3>5. Cache Mapping &amp; Replacement</h3><div class="ar-h" lang="ar">تخطيط الكاش والاستبدال</div></div>
+      <div class="tags"><span class="tag">Doctor: "I don't think much will come, but know direct &amp; associative"</span></div></div>
+    <div class="bi">
+      <div class="en"><p><b>Mapping</b> = linking main memory blocks to cache lines. Needed because there are fewer lines than blocks. Three techniques: <b>direct, associative, set-associative</b>.</p></div>
+      <div class="ar" lang="ar"><p><b>التخطيط (Mapping)</b> = ربط كتل الذاكرة الرئيسية بأسطر الكاش. نحتاجه لأن الأسطر أقل من الكتل. ثلاث تقنيات: <b>مباشر (direct)، ترابطي (associative)، ترابطي مجموعات (set-associative)</b>.</p></div>
+    </div>
+    <div class="answer"><span class="lab">Exam answer · Direct mapping</span>
+      <div class="bi"><div class="en">Each main-memory block maps to <b>only one possible cache line</b>: <span class="mono">i = j mod m</span> where <b>i</b> = cache line number, <b>j</b> = main-memory block number, <b>m</b> = number of lines in the cache.<br>
+        <b>Advantage:</b> simple and inexpensive. <b>Disadvantage:</b> fixed cache location for each block. If a program keeps using two blocks that map to the same line, they keep swapping in and out (<b>thrashing</b>) and the hit ratio is low.</div>
+      <div class="ar" lang="ar">كل كتلة من الذاكرة الرئيسية تُخطَّط إلى <b>سطر واحد فقط محتمل</b> في الكاش: <span class="mono">i = j mod m</span> حيث <b>i</b> = رقم سطر الكاش، <b>j</b> = رقم كتلة الذاكرة الرئيسية، <b>m</b> = عدد أسطر الكاش.<br>
+        <b>الميزة:</b> بسيط ورخيص. <b>العيب:</b> موقع ثابت لكل كتلة. إذا استمر البرنامج في استخدام كتلتين تُخطَّطان لنفس السطر، تتبادلان الطرد والإحضار باستمرار (<b>thrashing</b>) وتنخفض نسبة الـ hit.</div></div></div>
+    <div class="answer"><span class="lab">Exam answer · Associative mapping</span>
+      <div class="bi"><div class="en">A main-memory block can be placed in <b>any line</b> of the cache (each block is associated with all cache lines). More flexible, but a replacement algorithm is needed.</div>
+      <div class="ar" lang="ar">يمكن وضع كتلة الذاكرة الرئيسية في <b>أي سطر</b> من الكاش (كل كتلة مرتبطة بكل أسطر الكاش). أكثر مرونة لكنه يحتاج خوارزمية استبدال.</div></div></div>
+
+    <div class="sub">Try it · جرّبي التخطيط المباشر</div>
+    <div class="sim">
+      <div class="row">
+        <label>Cache lines (m)<select id="cm"><option>2</option><option selected>4</option><option>8</option></select></label>
+        <label>Block numbers requested (j)<input type="text" id="cseq" value="0 4 0 4 0 4" size="22" inputmode="numeric" aria-label="Block numbers"></label>
+        <button class="btn" id="crun">Run</button>
+      </div>
+      <div class="en" style="font-size:13.5px;color:var(--muted)">Each block j goes to line <span class="mono">i = j mod m</span>. Try <span class="mono">0 4 0 4</span> with m = 4 (thrashing!) then <span class="mono">0 1 2 3 0 1 2 3</span>.</div>
+      <div class="ar" lang="ar" style="font-size:13.5px;color:var(--muted)">جرّبي <span class="mono">0 4 0 4</span> مع m = 4 (thrashing!) ثم <span class="mono">0 1 2 3 0 1 2 3</span>.</div>
+      <div class="seqout" id="cout"></div>
+      <div class="cachelines" id="clines"></div>
+      <div id="csum" style="font-weight:600"></div>
+    </div>
+
+    <div class="answer"><span class="lab">Exam answer · Replacement algorithms (when the cache is full)</span>
+      <div class="bi"><div class="en">For <b>direct mapping</b> no choice exists (only one possible line), so no algorithm is needed. For associative techniques, four popular ones:
+        <ul><li><b>LRU</b> (Least Recently Used): replace the block with <b>no reference for the longest time</b>.</li>
+        <li><b>FIFO</b> (First In First Out): replace the block that has been in the cache <b>longest</b>.</li>
+        <li><b>LFU</b> (Least Frequently Used): replace the block with the <b>fewest hits</b>.</li>
+        <li><b>Random</b>: pick a line at random from the candidates.</li></ul></div>
+      <div class="ar" lang="ar">في <b>التخطيط المباشر</b> لا يوجد خيار (سطر واحد محتمل) فلا نحتاج خوارزمية. في الطرق الترابطية أربع خوارزميات شائعة:
+        <ul><li><b>LRU</b> (الأقل استخدامًا مؤخرًا): استبدال الكتلة التي <b>لم يُشر إليها منذ أطول وقت</b>.</li>
+        <li><b>FIFO</b> (الداخل أولًا يخرج أولًا): استبدال الكتلة الموجودة في الكاش <b>منذ أطول مدة</b>.</li>
+        <li><b>LFU</b> (الأقل تكرارًا): استبدال الكتلة ذات <b>أقل عدد hits</b>.</li>
+        <li><b>Random</b>: اختيار سطر عشوائي من المرشحين.</li></ul></div></div></div>
+  </div>
+</section>
+
+<!-- ===================== PAPERS ===================== -->
+<section class="pane" id="p-papers">
+  <div class="hero">
+    <h2>Sample papers: the exact question styles</h2>
+    <div class="ar keep" lang="ar" style="font-weight:600">نماذج الاختبار: الأسئلة بنفس الصيغة اللي ممكن تجي</div>
+    <p class="en" style="margin-top:8px">Paper A is from your photos, Paper B is from your PDF. Cover the answer, try it, then tap "Show answer". The pattern is the same in both: <b>6 quick MCQs</b> (½ mark each), <b>short questions</b> (2 marks, answer any 4), and <b>one long question</b> (4 marks, answer 1 of 2).</p>
+    <p class="ar" lang="ar">النموذج A من صورك، والنموذج B من ملف الـ PDF. غطّي الجواب وجرّبي، ثم اضغطي "Show answer". النمط واحد في الاثنين: <b>٦ أسئلة اختيار</b> (نصف درجة)، و<b>أسئلة قصيرة</b> (درجتان، أجيبي عن ٤)، و<b>سؤال طويل واحد</b> (٤ درجات، أجيبي عن واحد من اثنين).</p>
+  </div>
+
+  <div class="note en"><span class="lab">What repeats in both papers:</span> architecture (visible to programmer) · interconnection / system bus · PC · registers closest to the processor · <b>sequential access</b> · interrupt · memory hierarchy direction · CPU components · core · instruction cycle · bus · cache principles · replacement algorithms · von Neumann structure · <b>instruction cycle with interrupts (draw)</b>.</div>
+  <div class="note ar" lang="ar"><span class="lab">الأشياء المتكررة في النموذجين:</span> المعمارية (ظاهرة للمبرمج) · ناقل النظام · PC · المسجّلات الأقرب للمعالج · <b>الوصول التسلسلي</b> · المقاطعة · اتجاه هرم الذاكرة · مكوّنات CPU · النواة · دورة التعليمة · الناقل · مبادئ الكاش · خوارزميات الاستبدال · هيكل فون نيومان · <b>دورة التعليمة مع المقاطعات (ارسمي)</b>.</div>
+
+  <div class="topic">
+    <div class="t-head"><div><h3>Paper A · Section A (½ mark each)</h3><div class="ar-h" lang="ar">النموذج A · القسم الأول</div></div><div class="tags"><span class="tag">MCQ</span></div></div>
+    <details class="qa"><summary>i) Which component executes arithmetic and logical operations? (Control Unit / Memory / ALU / Registers)</summary><div class="ans"><b>ALU</b> (Arithmetic and Logic Unit). <span class="ar" lang="ar">وحدة الحساب والمنطق.</span></div></details>
+    <details class="qa"><summary>ii) The IAS memory consists of 1000 storage locations called ___ (Bit / Byte / Words / None)</summary><div class="ans"><b>Words</b> (each is 40 bits). <span class="ar" lang="ar">كلمات، كل كلمة ٤٠ بت.</span></div></details>
+    <details class="qa"><summary>iii) The use of ___ device defines the <u>second</u> generation. (Transistor / Integrated Circuit / Resistor / Vacuum tubes)</summary><div class="ans"><b>Transistor</b>. First gen = vacuum tubes, second = transistors, third = integrated circuits. <span class="ar" lang="ar">الأول صمامات، الثاني ترانزستور، الثالث دوائر متكاملة.</span></div></details>
+    <details class="qa"><summary>iv) The collection of paths connecting CPU, memory and I/O is called the ___ (Interrupt / Interconnection structure / Internetwork / Networking)</summary><div class="ans"><b>Interconnection structure</b>. <span class="ar" lang="ar">هيكل الربط.</span></div></details>
+    <details class="qa"><summary>v) In ___ method data is retrieved in the same order in which it was stored. (Random / Sequential / Direct / Program)</summary><div class="ans"><b>Sequential access</b>. <span class="ar" lang="ar">الوصول التسلسلي.</span></div></details>
+    <details class="qa"><summary>vi) As we go down the memory hierarchy, access time ___ (Increases / Decreases / Same / None)</summary><div class="ans"><b>Increases</b>. <span class="ar" lang="ar">يزيد.</span></div></details>
+  </div>
+
+  <div class="topic">
+    <div class="t-head"><div><h3>Paper A · Section B (2 marks each, answer any 4)</h3><div class="ar-h" lang="ar">القسم الثاني · أجيبي عن ٤</div></div><div class="tags"><span class="tag">Short answer</span></div></div>
+    <details class="qa"><summary>2. Explain the major structural components of a CPU?</summary><div class="ans">
+      <div class="bi"><div class="en"><ul><li><b>Control unit</b>: controls the operation of the CPU and hence the computer.</li><li><b>ALU</b>: performs the data processing (arithmetic and logic) functions.</li><li><b>Registers</b>: storage internal to the CPU.</li><li><b>CPU interconnection</b>: mechanism for communication among the control unit, ALU and registers.</li></ul></div>
+      <div class="ar" lang="ar"><ul><li><b>وحدة التحكم</b>: تتحكم بعمل المعالج وبالتالي الحاسوب.</li><li><b>ALU</b>: تنفّذ معالجة البيانات (حساب ومنطق).</li><li><b>المسجّلات</b>: تخزين داخل المعالج.</li><li><b>ربط المعالج</b>: آلية اتصال بين وحدة التحكم وALU والمسجّلات.</li></ul></div></div></div></details>
+    <details class="qa"><summary>3. What is Core in multicore computer structure?</summary><div class="ans">
+      <div class="bi"><div class="en">When multiple processors reside on a <b>single chip</b>, it is a multicore computer. Each processing unit (control unit, ALU, registers, and perhaps cache) is called a <b>core</b>. A core is an individual processing unit on a processor chip, and may be equal in function to a CPU in a single-CPU system. Its parts: instruction logic (fetch and decode), ALU, load/store logic.</div>
+      <div class="ar" lang="ar">عندما توجد عدة معالجات على <b>شريحة واحدة</b> يسمى الحاسوب متعدد الأنوية. كل وحدة معالجة (وحدة تحكم، ALU، مسجّلات، وربما كاش) تسمى <b>نواة (core)</b>. النواة وحدة معالجة مستقلة على الشريحة وقد تعادل CPU في نظام بمعالج واحد. أجزاؤها: منطق التعليمات (جلب وفك)، ALU، منطق التحميل/التخزين.</div></div></div></details>
+    <details class="qa"><summary>4. What is instruction cycle?</summary><div class="ans">
+      <div class="bi"><div class="en">The processing required for a <b>single instruction</b> is called an instruction cycle. It has <b>two steps</b>: <b>Fetch</b> (read the instruction from memory, address in the PC, then increment the PC, instruction goes to IR) and <b>Execute</b> (interpret the instruction in IR and perform the action). The processor repeats this for every instruction.</div>
+      <div class="ar" lang="ar">المعالجة اللازمة لـ<b>تعليمة واحدة</b> تسمى دورة التعليمة. لها <b>خطوتان</b>: <b>الجلب (Fetch)</b> (قراءة التعليمة من الذاكرة، العنوان في PC ثم يُزاد PC، وتذهب التعليمة إلى IR) و<b>التنفيذ (Execute)</b> (تفسير التعليمة في IR وتنفيذ الإجراء). يكرر المعالج ذلك لكل تعليمة.</div></div></div></details>
+    <details class="qa"><summary>5. Define Bus Interconnection.</summary><div class="ans">
+      <div class="bi"><div class="en">A <b>bus</b> is a communication pathway connecting two or more devices. It is a <b>shared transmission medium</b>: a signal sent by one device is available to all others, so only one device can transmit at a time (otherwise signals overlap and are garbled). Three buses: <b>data bus</b> (data/instructions), <b>address bus</b> (source/destination of data), <b>control bus</b> (read/write, interrupt request, clock).</div>
+      <div class="ar" lang="ar"><b>الناقل (bus)</b> مسار اتصال يربط جهازين أو أكثر. هو <b>وسط نقل مشترك</b>: الإشارة التي يرسلها جهاز تصل لكل الأجهزة، لذلك جهاز واحد فقط يرسل في الوقت الواحد (وإلا تتداخل الإشارات). ثلاثة نواقل: <b>البيانات</b> (بيانات/تعليمات)، <b>العناوين</b> (المصدر/الوجهة)، <b>التحكم</b> (قراءة/كتابة، طلب مقاطعة، ساعة).</div></div></div></details>
+    <details class="qa"><summary>6. Explain Cache memory principles.</summary><div class="ans">
+      <div class="bi"><div class="en"><ul><li>The cache stores <b>copies of portions of main memory</b>.</li><li>When the processor reads a word, a check is made to see if the word is in the cache.</li><li>If present, it is <b>delivered to the processor</b> (hit).</li><li>If not, a <b>block of main memory</b> (a fixed number of words) is read into the cache, and then the word is delivered to the processor (miss).</li></ul></div>
+      <div class="ar" lang="ar"><ul><li>الكاش يخزن <b>نسخًا من أجزاء الذاكرة الرئيسية</b>.</li><li>عندما يقرأ المعالج كلمة، يتحقق النظام هل هي في الكاش.</li><li>إذا موجودة، <b>تُسلَّم للمعالج</b> (hit).</li><li>إذا لا، تُقرأ <b>كتلة من الذاكرة الرئيسية</b> (عدد ثابت من الكلمات) إلى الكاش ثم تُسلَّم الكلمة للمعالج (miss).</li></ul></div></div></div></details>
+  </div>
+
+  <div class="topic">
+    <div class="t-head"><div><h3>Paper B · Section A &amp; B</h3><div class="ar-h" lang="ar">النموذج B</div></div><div class="tags"><span class="tag">From your PDF</span></div></div>
+    <details class="qa"><summary>A1) System interconnection in a computer is achieved through ___ (Control unit / MAR / System bus / ALU)</summary><div class="ans"><b>System bus</b>.</div></details>
+    <details class="qa"><summary>A2) ___ is the attributes visible to the programmer and describe what the computer does. (Organization / Structure / Architecture / Function)</summary><div class="ans"><b>Architecture</b>.</div></details>
+    <details class="qa"><summary>A3) ___ contains the address of the next instruction to be fetched from memory. (PC / AC / IR / MAR)</summary><div class="ans"><b>PC</b> (Program Counter). Careful: MAR holds the address for the current read/write, not "the next instruction". <span class="ar" lang="ar">انتبهي: MAR ليس هو.</span></div></details>
+    <details class="qa"><summary>A4) At the highest level (closest to the processor) are the processor ___ (Main memory / Register / Cache memory / Magnetic disk)</summary><div class="ans"><b>Register</b>.</div></details>
+    <details class="qa"><summary>A5) In ___ access method data is retrieved in the same order in which it was stored. (Random / Associative / Direct / Sequential)</summary><div class="ans"><b>Sequential</b>.</div></details>
+    <details class="qa"><summary>A6) ___ is a condition that causes the microprocessor to temporarily work on another task, then return to the previous one. (Interrupt / Halt / Disrupt / Exit)</summary><div class="ans"><b>Interrupt</b>.</div></details>
+    <details class="qa"><summary>B) What are the consequences of Moore's law?</summary><div class="ans">
+      <div class="bi"><div class="en">Moore's law (Gordon Moore, co-founder of Intel): the number of transistors on a chip doubles about every year. Consequences: <ol><li><b>Cost reduced</b></li><li><b>Size of computer smaller</b></li><li><b>Performance increased</b></li><li><b>Power consumption reduced</b></li></ol></div>
+      <div class="ar" lang="ar">قانون مور (جوردون مور، شريك مؤسس لإنتل): عدد الترانزستورات على الشريحة يتضاعف تقريبًا كل سنة. النتائج: <ol><li><b>التكلفة تنخفض</b></li><li><b>الحجم يصغر</b></li><li><b>الأداء يزيد</b></li><li><b>استهلاك الطاقة ينخفض</b></li></ol></div></div></div></details>
+    <details class="qa"><summary>B) Discuss different types of replacement algorithms.</summary><div class="ans">
+      <div class="bi"><div class="en"><ul><li><b>LRU</b> (Least Recently Used): replace the block that has been in the cache longest with no reference to it.</li><li><b>FIFO</b> (First In First Out): replace the block that has been in the cache longest.</li><li><b>LFU</b> (Least Frequently Used): replace the block with the fewest hits.</li><li><b>Random</b>: pick a line at random among the candidates.</li></ul></div>
+      <div class="ar" lang="ar"><ul><li><b>LRU</b>: استبدال الكتلة التي لم يُشر إليها منذ أطول وقت.</li><li><b>FIFO</b>: استبدال الكتلة الموجودة في الكاش منذ أطول وقت.</li><li><b>LFU</b>: استبدال الكتلة ذات أقل عدد hits.</li><li><b>Random</b>: اختيار سطر عشوائي من المرشحين.</li></ul></div></div></div></details>
+    <details class="qa"><summary>B) Define Hardwired Program.</summary><div class="ans">
+      <div class="bi"><div class="en"><b>Hardwired program:</b> connecting components in the desired configuration as a form of programming; the resulting "program" is in hardware form. To change it you must rewire. (Software replaced this: a sequence of codes, new program = new codes.)</div>
+      <div class="ar" lang="ar"><b>البرنامج المربوط بالعتاد:</b> توصيل المكوّنات بالترتيب المطلوب كشكل من البرمجة، والبرنامج الناتج على شكل عتاد. لتغييره لازم إعادة التوصيل. (البرمجيات حلّت محله: سلسلة رموز، وبرنامج جديد = رموز جديدة.)</div></div></div></details>
+    <details class="qa"><summary>B) Write a short note on Bus interconnection. · Explain cache memory principles.</summary><div class="ans">Same as Paper A questions 5 and 6 above. <span class="ar" lang="ar">نفس السؤالين ٥ و٦ أعلاه.</span></div></details>
+  </div>
+
+  <div class="topic hot">
+    <div class="t-head"><div><h3>Section C (4 marks, answer one)</h3><div class="ar-h" lang="ar">القسم الثالث · السؤال الطويل</div></div><div class="tags"><span class="tag long">LONG · 4 MARKS</span></div></div>
+
+    <details class="qa" open><summary>Draw and explain the General structure of the von Neumann machine.</summary><div class="ans">
+      <p class="en"><b>Drawing:</b> see the diagram in Chapter 1, topic 5 (ALU and program control unit inside the CPU box, plus main memory and input-output equipment, with arrows). <b>Explanation (write these 4 lines):</b></p>
+      <p class="ar" lang="ar"><b>الرسم:</b> شوفي الشكل في الفصل ١، الموضوع ٥ (ALU ووحدة التحكم داخل مستطيل CPU، مع الذاكرة الرئيسية ومعدّات الإدخال/الإخراج، وأسهم). <b>الشرح (اكتبي هذي الأسطر الأربعة):</b></p>
+      <div class="bi"><div class="en"><ul><li>A <b>main memory</b> which stores both data and instructions.</li><li>An <b>ALU</b> capable of operating on binary data.</li><li>A <b>control unit</b> which interprets the instructions in memory and causes them to be executed.</li><li><b>Input/output (I/O) equipment</b> operated by the control unit.</li></ul></div>
+      <div class="ar" lang="ar"><ul><li><b>ذاكرة رئيسية</b> تخزن البيانات والتعليمات.</li><li><b>ALU</b> قادرة على العمل على البيانات الثنائية.</li><li><b>وحدة تحكم</b> تفسّر التعليمات في الذاكرة وتجعلها تُنفَّذ.</li><li><b>معدّات I/O</b> تشغّلها وحدة التحكم.</li></ul></div></div>
+      <p class="en">Add: it is based on the <b>stored program concept</b> and three key concepts (stored data+instructions, addressable memory, sequential execution).</p>
+      <p class="ar" lang="ar">أضيفي: تقوم على <b>مفهوم البرنامج المخزّن</b> ومفاهيمه الثلاثة (بيانات وتعليمات مخزّنة، ذاكرة قابلة للعنونة، تنفيذ تسلسلي).</p></div></details>
+
+    <details class="qa" open><summary>What is an interrupt? Draw and explain the instruction cycle with interrupts.</summary><div class="ans">
+      <div class="bi"><div class="en"><b>Interrupt:</b> a condition that causes the processor to temporarily work on another task and then return to the previous one.</div>
+      <div class="ar" lang="ar"><b>المقاطعة:</b> حالة تجعل المعالج يعمل مؤقتًا على مهمة أخرى ثم يعود للمهمة السابقة.</div></div>
+      <figure class="diag"><b style="font-family:var(--f-mono);font-size:12px;color:var(--accent)">DRAW THIS · INSTRUCTION CYCLE WITH INTERRUPTS</b>
+      <svg viewBox="0 0 640 330" role="img" aria-label="Instruction cycle with interrupts: START, fetch next instruction, execute instruction, then if interrupts are enabled check for interrupt and process interrupt, else loop to fetch; HALT after execute">
+        <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)"/></marker></defs>
+        <g font-family="IBM Plex Sans,sans-serif" font-size="13" fill="var(--ink)" text-anchor="middle">
+        <text x="95" y="22" font-size="12" fill="var(--muted)" font-family="IBM Plex Mono,monospace">FETCH CYCLE</text>
+        <text x="300" y="22" font-size="12" fill="var(--muted)" font-family="IBM Plex Mono,monospace">EXECUTE CYCLE</text>
+        <text x="520" y="22" font-size="12" fill="var(--muted)" font-family="IBM Plex Mono,monospace">INTERRUPT CYCLE</text>
+        <rect x="14" y="120" width="60" height="30" rx="15" fill="var(--code)" stroke="var(--accent)" stroke-width="2"/><text x="44" y="140" font-weight="700">START</text>
+        <rect x="100" y="112" width="100" height="46" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="150" y="132">Fetch next</text><text x="150" y="148">instruction</text>
+        <rect x="250" y="112" width="100" height="46" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="300" y="132">Execute</text><text x="300" y="148">instruction</text>
+        <rect x="560" y="55" width="64" height="30" rx="15" fill="var(--code)" stroke="var(--accent)" stroke-width="2"/><text x="592" y="75" font-weight="700">HALT</text>
+        <rect x="395" y="215" width="100" height="40" rx="6" fill="var(--hot-soft)" stroke="var(--hot)" stroke-width="2"/><text x="445" y="239">Check for interrupt</text>
+        <rect x="515" y="215" width="100" height="40" rx="6" fill="var(--hot-soft)" stroke="var(--hot)" stroke-width="2"/><text x="565" y="233">Process</text><text x="565" y="248">interrupt</text>
+        <text x="190" y="196" fill="var(--muted)" font-size="12">Interrupts disabled</text>
+        <text x="372" y="196" fill="var(--muted)" font-size="12">Interrupts enabled</text>
+        </g>
+        <g stroke="var(--accent)" stroke-width="2" fill="none">
+          <path d="M74 135H98" marker-end="url(#ah3)"/>
+          <path d="M200 135H248" marker-end="url(#ah3)"/>
+          <path d="M350 135H592V87" marker-end="url(#ah3)"/>
+          <path d="M300 160V176H150V160" marker-end="url(#ah3)"/>
+          <path d="M300 176V235H393" marker-end="url(#ah3)"/>
+          <path d="M495 235H513" marker-end="url(#ah3)"/>
+          <path d="M565 257V300H125V160" marker-end="url(#ah3)"/>
+        </g>
+        <text x="320" y="316" fill="var(--muted)" font-size="12" text-anchor="middle" font-family="IBM Plex Sans,sans-serif">Processing continues with the next fetch (PC now at the interrupt handler)</text>
+      </svg>
+      <figcaption>Simplified from Figure 3.9. If interrupts are disabled the cycle goes straight back to fetch. If enabled, the processor checks for an interrupt first.</figcaption></figure>
+      <div class="bi"><div class="en"><p><b>Explanation:</b></p><ol>
+        <li><b>Fetch cycle:</b> read the instruction at the address in the PC, load it into IR, increment PC.</li>
+        <li><b>Execute cycle:</b> interpret the instruction and perform it (processor–memory, processor–I/O, data processing, or control).</li>
+        <li><b>Interrupt cycle</b> (added to the instruction cycle): the processor checks whether an interrupt signal is present.
+          <ul><li><b>No interrupt pending</b> → go to fetch the next instruction of the current program.</li>
+          <li><b>Interrupt pending</b> → (a) suspend the current program, (b) <b>save its context</b> (PC value and other relevant data), (c) set PC to the <b>start address of the interrupt handler</b> routine. After the handler finishes, the processor resumes the original program.</li></ul></li></ol>
+        <p>Interrupt classes: Program, Timer, I/O, Hardware failure. With multiple interrupts, higher priority is served first.</p></div>
+      <div class="ar" lang="ar"><p><b>الشرح:</b></p><ol>
+        <li><b>دورة الجلب:</b> قراءة التعليمة من العنوان الموجود في PC، تحميلها في IR، وزيادة PC.</li>
+        <li><b>دورة التنفيذ:</b> تفسير التعليمة وتنفيذها (معالج–ذاكرة، معالج–I/O، معالجة بيانات، أو تحكم).</li>
+        <li><b>دورة المقاطعة</b> (تُضاف لدورة التعليمة): يفحص المعالج هل توجد إشارة مقاطعة.
+          <ul><li><b>لا توجد</b> ← يذهب لجلب التعليمة التالية من البرنامج الحالي.</li>
+          <li><b>توجد</b> ← (أ) يوقف البرنامج الحالي، (ب) <b>يحفظ سياقه</b> (قيمة PC وبيانات أخرى)، (ج) يضع في PC <b>عنوان بداية روتين معالجة المقاطعة</b>. بعد انتهاء الروتين يكمل المعالج البرنامج الأصلي.</li></ul></li></ol>
+        <p>أنواع المقاطعات: برنامج، مؤقت، I/O، فشل عتاد. عند تعدد المقاطعات تُخدَّم الأعلى أولوية أولًا.</p></div></div></div></details>
+  </div>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section class="pane" id="p-quiz">
+  <div id="quizbox"></div>
+</section>
+
+<!-- ===================== CARDS ===================== -->
+<section class="pane" id="p-cards">
+  <div class="qmeta"><span id="fcount"></span><span id="fknown"></span></div>
+  <div class="flash"><button class="fc" id="fc" style="width:100%;font:inherit;color:inherit;cursor:pointer" aria-live="polite"></button></div>
+  <div class="hint en">Tap the card to flip · اضغطي على البطاقة لقلبها</div>
+  <div class="ctrls" style="justify-content:center">
+    <button class="btn ghost" id="fprev">← Prev</button>
+    <button class="btn" id="fgot">I know it ✓ <span class="ar keep" lang="ar" style="display:inline;font-size:.9em">أعرفها</span></button>
+    <button class="btn ghost" id="fagain">Review again ↻</button>
+    <button class="btn ghost" id="fnext">Next →</button>
+    <button class="btn ghost" id="fshuf">Shuffle</button>
+  </div>
+</section>
+</main>
+<footer>Based on your three chapter PDFs and the doctor's recording · Good luck, you can do this. <span class="ar keep" lang="ar" style="display:inline">بالتوفيق، تقدرين!</span></footer>
+</div>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+/* language mode */
+function setMode(m){
+  document.body.className=m==='both'?'':'m-'+m;
+  ['both','en','ar'].forEach(function(x){$('#m-'+x).setAttribute('aria-pressed',x===m)});
+  store('c332_mode',m);
+}
+['both','en','ar'].forEach(function(x){$('#m-'+x).addEventListener('click',function(){setMode(x)})});
+setMode(store('c332_mode')||'both');
+
+/* tabs */
+function showTab(t){
+  $$('.pane').forEach(function(p){p.classList.toggle('on',p.id==='p-'+t)});
+  $$('#tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});
+  window.scrollTo({top:0});
+}
+$$('#tabs button').forEach(function(b){b.addEventListener('click',function(){showTab(b.dataset.t)})});
+
+/* priority checklist */
+var items=[
+ {id:'arch',t:'Architecture vs Organization + define ISA',a:'العمارة مقابل التنظيم + تعريف ISA',tab:'ch1',el:'c1-arch',tag:'Ch1 · slides 9, 10',ty:'Define / choose'},
+ {id:'func',t:'The 4 functions of a computer + DRAW the functional view',a:'الوظائف الأربع للحاسوب + رسم المنظور الوظيفي',tab:'ch1',el:'c1-func',tag:'Ch1 · slides 12, 14',ty:'List / draw'},
+ {id:'comp',t:'The 4 components (CPU, memory, I/O, interconnection) + define Core',a:'المكوّنات الأربعة + تعريف النواة Core',tab:'ch1',el:'c1-comp',tag:'Ch1 · slides 16, 22',ty:'List / define'},
+ {id:'gen',t:'Generations of computers: focus on the 3rd (integrated circuits)',a:'أجيال الحواسيب: ركّزي على الجيل الثالث (الدوائر المتكاملة)',tab:'ch1',el:'c1-gen',tag:'Ch1 · slide 31',ty:'Describe'},
+ {id:'vn',t:'Von Neumann: 3 key concepts + what the machine has + general structure',a:'فون نيومان: المفاهيم الثلاثة + مكوناته + البنية العامة',tab:'ch1',el:'c1-vn',tag:'Ch1 · slides 36, 37, 38 · also Ch2',ty:'LONG'},
+ {id:'cycle',t:'Instruction cycle: fetch + execute (4 execute categories)',a:'دورة التعليمة: جلب + تنفيذ (٤ أنواع للتنفيذ)',tab:'ch2',el:'c2-cycle',tag:'Ch2 · computer function (4 slides)',ty:'LONG · 4 marks'},
+ {id:'bus',t:'Bus interconnection: data, address, control bus',a:'الناقل: ناقل البيانات والعناوين والتحكم',tab:'ch2',el:'c2-bus',tag:'Ch2',ty:'Short / list'},
+ {id:'acc',t:'Access methods: sequential access (same order as stored)',a:'طرق الوصول: الوصول التسلسلي (بنفس ترتيب التخزين)',tab:'ch3',el:'c3-char',tag:'Ch3',ty:'Choose'},
+ {id:'hier',t:'Memory hierarchy: what happens as you go down (capacity, cost, speed)',a:'هرم الذاكرة: ماذا يحدث كلما نزلنا (السعة، التكلفة، السرعة)',tab:'ch3',el:'c3-hier',tag:'Ch3',ty:'Direction question'},
+ {id:'cache',t:'Cache memory principles (slide 14)',a:'مبادئ الكاش (الشريحة ١٤)',tab:'ch3',el:'c3-cache',tag:'Ch3',ty:'Very important'},
+ {id:'addr',t:'Logical (virtual) cache vs physical cache',a:'الكاش المنطقي مقابل الفيزيائي',tab:'ch3',el:'c3-addr',tag:'Ch3',ty:'Define'},
+ {id:'hw',t:'Hardwired program, Moore\'s law consequences (appeared in sample paper)',a:'البرنامج المربوط بالعتاد + نتائج قانون مور (ظهرت في نموذج الاختبار)',tab:'papers',el:'p-papers',tag:'Sample paper B',ty:'Short'},
+ {id:'pap',t:'Do both sample papers (cover answers first)',a:'حلّي نموذجي الاختبار (غطّي الأجوبة أولًا)',tab:'papers',el:'p-papers',tag:'Sample papers',ty:'Practice'},
+ {id:'map',t:'Mapping: direct and associative (know basics only)',a:'التخطيط: المباشر والترابطي (الأساسيات فقط)',tab:'ch3',el:'c3-map',tag:'Ch3',ty:'Lower chance'}
+];
+var done={};try{done=JSON.parse(store('c332_done')||'{}')||{}}catch(e){done={}}
+function renderList(){
+  var ul=$('#checklist');ul.innerHTML='';
+  items.forEach(function(it){
+    var li=document.createElement('li');
+    li.innerHTML='<label><input type="checkbox" '+(done[it.id]?'checked':'')+'><span><b>'+it.t+'</b><span class="ar" lang="ar" style="display:block;font-size:15px">'+it.a+'</span><span class="tags"><span class="tag hot">'+it.ty+'</span><span class="tag">'+it.tag+'</span></span><button class="goto" type="button">Open this topic · افتحي الموضوع →</button></span></label>';
+    $('input',li).addEventListener('change',function(e){done[it.id]=e.target.checked;store('c332_done',JSON.stringify(done));upd()});
+    $('.goto',li).addEventListener('click',function(e){e.preventDefault();showTab(it.tab);var el=document.getElementById(it.el);if(el)setTimeout(function(){el.scrollIntoView({block:'start'})},30)});
+    ul.appendChild(li);
+  });upd();
+}
+function upd(){var n=items.filter(function(i){return done[i.id]}).length;$('#progbar').style.width=(100*n/items.length)+'%';$('#proglabel').textContent=n+' of '+items.length+' done';}
+renderList();
+
+/* instruction cycle simulator */
+var S=[
+ {p:'',n:'START',w:'Ready: PC points at address 300',e:'The program is in memory. PC = 300 means "the next instruction is at address 300".',a:'البرنامج في الذاكرة. PC = 300 يعني "التعليمة التالية في العنوان 300".',s:{PC:300,MAR:'-',MBR:'-',IR:'-',AC:0}},
+ {p:'fetch',n:'FETCH 1',w:'MAR ← PC',e:'Copy the address from the Program Counter into the Memory Address Register.',a:'انسخي العنوان من عداد البرنامج PC إلى مسجّل عنوان الذاكرة MAR.',s:{MAR:300},c:['MAR']},
+ {p:'fetch',n:'FETCH 2',w:'MBR ← M[MAR]',e:'Memory sends the contents of address 300 (the instruction 1940) into the Memory Buffer Register.',a:'الذاكرة ترسل محتوى العنوان 300 (التعليمة 1940) إلى مسجّل المخزن المؤقت MBR.',s:{MBR:'1940'},c:['MBR']},
+ {p:'fetch',n:'FETCH 3',w:'PC ← PC + 1',e:'Increment the PC so the next fetch takes the next instruction in sequence.',a:'زيادة PC بمقدار 1 لتُجلب التعليمة التالية بالتسلسل.',s:{PC:301},c:['PC']},
+ {p:'fetch',n:'FETCH 4',w:'IR ← MBR',e:'Put the fetched instruction into the Instruction Register. Fetch is finished.',a:'وضع التعليمة المجلوبة في مسجّل التعليمات IR. انتهى الجلب.',s:{IR:'1940'},c:['IR']},
+ {p:'exec',n:'DECODE',w:'Interpret 1940 → opcode 1, address 940',e:'The processor reads the instruction: opcode 1 = "load AC from memory", address = 940.',a:'يقرأ المعالج التعليمة: opcode = 1 يعني "حمّل AC من الذاكرة"، والعنوان = 940.',s:{},c:['IR']},
+ {p:'exec',n:'EXECUTE 1',w:'MAR ← 940, MBR ← M[940] = 0003',e:'Processor–memory action: fetch the data from address 940 into MBR.',a:'إجراء معالج–ذاكرة: جلب البيانات من العنوان 940 إلى MBR.',s:{MAR:940,MBR:'0003'},c:['MAR','MBR']},
+ {p:'exec',n:'EXECUTE 2',w:'AC ← MBR',e:'The accumulator now holds 3. Execute is finished.',a:'المجمّع AC صار يحمل 3. انتهى التنفيذ.',s:{AC:3},c:['AC']},
+ {p:'int',n:'INTERRUPT CHECK',w:'',e:'',a:'',s:{},c:[]}
+];
+var si=0;
+function simState(i){var st={};for(var k=0;k<=i;k++){var s=S[k].s;for(var key in s)st[key]=s[key]}return st}
+function renderSim(){
+  var step=S[si],st=simState(si),intr=$('#sint').checked,names=['PC','MAR','MBR','IR','AC'];
+  if(step.p==='int'){
+    if(intr){
+      st.PC='ISR';step=Object.assign({},step,{w:'Interrupt pending → save context, PC ← handler address',e:'The processor suspends this program, saves its context (PC = 301 and other data), then sets PC to the start of the interrupt handler. After the handler it comes back to 301.',a:'يوقف المعالج البرنامج، يحفظ السياق (PC = 301 وبيانات أخرى)، ثم يضع في PC عنوان بداية معالج المقاطعة. بعد انتهائه يعود إلى 301.',c:['PC']});
+    }else{
+      step=Object.assign({},step,{w:'No interrupt → go fetch the next instruction (address 301)',e:'No interrupt signal is waiting, so the cycle repeats: PC = 301, so FETCH 1 starts again.',a:'لا توجد إشارة مقاطعة، فتتكرر الدورة: PC = 301 وتبدأ الجلب من جديد.'});
+    }
+  }
+  $('#regs').innerHTML=names.map(function(n){return '<div class="reg'+((step.c||[]).indexOf(n)>-1?' chg':'')+'"><small>'+n+'</small><b>'+(st[n]===undefined?'-':st[n])+'</b></div>'}).join('');
+  $$('#phase span').forEach(function(sp){sp.classList.toggle('on',sp.dataset.p===step.p)});
+  $('#sn').textContent='STEP '+si+' / '+(S.length-1)+' · '+step.n;
+  $('#sw').textContent=step.w;$('#sde').textContent=step.e;$('#sda').textContent=step.a;
+  $('#sback').disabled=si===0;$('#snext').disabled=si===S.length-1;
+}
+$('#snext').addEventListener('click',function(){if(si<S.length-1){si++;renderSim()}});
+$('#sback').addEventListener('click',function(){if(si>0){si--;renderSim()}});
+$('#sreset').addEventListener('click',function(){si=0;renderSim()});
+$('#sint').addEventListener('change',renderSim);
+renderSim();
+
+/* hierarchy */
+var H=[
+ {n:'Registers',a:'المسجّلات',d:'Inside the CPU',sp:100,co:100,ca:6},
+ {n:'Cache (L1, L2, L3)',a:'الكاش',d:'On/near the CPU',sp:80,co:80,ca:20},
+ {n:'Main memory (DRAM)',a:'الذاكرة الرئيسية',d:'Internal',sp:55,co:50,ca:45},
+ {n:'Hard disk',a:'القرص الصلب',d:'External',sp:25,co:20,ca:75},
+ {n:'Optical disk / Tape',a:'القرص الضوئي / الشريط',d:'Removable',sp:8,co:6,ca:100}
+];
+var hs=2;
+function renderHier(){
+  var box=$('#hier');box.innerHTML='';
+  H.forEach(function(h,i){
+    var b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',i===hs);
+    b.innerHTML='<span class="nm"><b>'+h.n+'</b><span>'+h.a+' · '+h.d+'</span></span>'+[h.sp,h.co,h.ca].map(function(v){return '<span class="bar"><i style="width:'+v+'%"></i></span>'}).join('');
+    b.addEventListener('click',function(){hs=i;renderHier()});box.appendChild(b);
+  });
+  var h=H[hs],top=hs===0,bot=hs===H.length-1;
+  $('#hierans').innerHTML='<span class="lab">'+h.n+' · '+h.a+'</span><div class="bi"><div class="en">'+(top?'Top level: <b>fastest</b>, <b>most expensive per bit</b>, <b>smallest</b>. Closest to the processor. The CPU uses it most often.':bot?'Bottom level: <b>slowest</b>, <b>cheapest per bit</b>, <b>largest</b>. The CPU uses it least often.':'Compared with the level above: <b>slower</b>, <b>cheaper per bit</b>, <b>bigger</b>. Compared with the level below: <b>faster</b>, <b>more expensive</b>, <b>smaller</b>.')+'</div><div class="ar" lang="ar">'+(top?'أعلى طبقة: <b>الأسرع</b> و<b>الأغلى لكل بت</b> و<b>الأصغر</b>. الأقرب للمعالج، ويستخدمها كثيرًا.':bot?'أسفل طبقة: <b>الأبطأ</b> و<b>الأرخص لكل بت</b> و<b>الأكبر</b>. المعالج يستخدمها أقل شيء.':'مقارنة بالطبقة الأعلى: <b>أبطأ</b> و<b>أرخص لكل بت</b> و<b>أكبر</b>. ومقارنة بالأدنى: <b>أسرع</b> و<b>أغلى</b> و<b>أصغر</b>.')+'</div></div>';
+}
+renderHier();
+
+/* cache direct-mapping sim */
+function runCache(){
+  var m=parseInt($('#cm').value,10),seq=$('#cseq').value.split(/[\s,]+/).filter(Boolean).map(Number).filter(function(x){return isFinite(x)&&x>=0}).slice(0,24);
+  var lines=[];for(var i=0;i<m;i++)lines.push(null);var hit=0,out='';
+  seq.forEach(function(j){var i=j%m,h=lines[i]===j;if(h)hit++;else lines[i]=j;out+='<span class="'+(h?'hit':'miss')+'">'+j+' → line '+i+' '+(h?'HIT':'MISS')+'</span>'});
+  $('#cout').innerHTML=out||'<span>Enter block numbers like 0 4 0 4</span>';
+  $('#clines').innerHTML=lines.map(function(v,i){return '<div><small>line '+i+'</small>'+(v===null?'empty':'block '+v)+'</div>'}).join('');
+  $('#csum').textContent=seq.length?('Hits: '+hit+' / '+seq.length+' · Hit ratio '+Math.round(100*hit/seq.length)+'%'+(hit===0&&seq.length>3?'  (thrashing!)':'')):'';
+}
+$('#crun').addEventListener('click',runCache);$('#cm').addEventListener('change',runCache);$('#cseq').addEventListener('keydown',function(e){if(e.key==='Enter')runCache()});
+runCache();
+
+/* quiz */
+var Q=[
+ ['"____ describes what the computer can do." Choose the term.','«____» يصف ماذا يستطيع الحاسوب أن يفعل','Architecture','Organization','Structure','Function','Architecture is the attributes visible to the programmer: it says WHAT the computer does.','المعمارية هي الخصائص الظاهرة للمبرمج، وتصف ماذا يفعل الحاسوب.'],
+ ['Hardware details transparent to the programmer (control signals, memory technology) are called:','التفاصيل العتادية المخفية عن المبرمج (إشارات التحكم، تقنية الذاكرة) تسمى:','Organization','Architecture','Instruction set','Opcode','Organization = how features are implemented.','Organization = كيف تم تنفيذ الميزات.'],
+ ['Which is NOT one of the four basic functions of a computer?','أي مما يلي ليس من الوظائف الأربع الأساسية؟','Data compilation','Data processing','Data storage','Data movement','The four are processing, storage, movement and control.','الأربع: معالجة، تخزين، نقل، تحكم.'],
+ ['Which is NOT one of the four structural components of a single-processor computer?','أي مما يلي ليس من المكوّنات الهيكلية الأربعة؟','Operating system','CPU','Main memory','System interconnection','CPU, main memory, I/O and system interconnection. An OS is software.','المكوّنات: CPU، ذاكرة رئيسية، I/O، ربط النظام. نظام التشغيل برمجيات.'],
+ ['An individual processing unit on a processor chip is called a:','وحدة معالجة مستقلة على شريحة المعالج تسمى:','Core','Bus','Register','Cache line','That is the definition of a core.','هذا تعريف النواة (core).'],
+ ['The third generation of computers used:','الجيل الثالث من الحواسيب استخدم:','Integrated circuits','Vacuum tubes','Discrete transistors','Magnetic cores only','Third generation = integrated circuits (ICs): many components on one circuit.','الجيل الثالث = الدوائر المتكاملة.'],
+ ['ENIAC (first generation) used:','إنياك (الجيل الأول) استخدم:','18,000 vacuum tubes','Transistors','Integrated circuits','Optical disks','ENIAC: decimal, switches, 18,000 tubes, 30 tons.','ENIAC: نظام عشري، مفاتيح، ١٨٠٠٠ صمام، ٣٠ طنًا.'],
+ ['The key idea of the von Neumann machine is:','الفكرة الأساسية لآلة فون نيومان هي:','Stored program: data and instructions share the same memory','Separate memories for data and instructions','Parallel execution of every instruction','Hardwired programs','Stored program concept.','مفهوم البرنامج المخزّن.'],
+ ['Which is NOT one of von Neumann\'s three key concepts?','أي مما يلي ليس من مفاهيم فون نيومان الثلاثة؟','Execution occurs in parallel','Data and instructions are stored in memory','Memory is addressable by location','Execution occurs sequentially','Execution is sequential, not parallel.','التنفيذ تسلسلي وليس متوازيًا.'],
+ ['The IAS memory has:','ذاكرة IAS فيها:','1,000 words of 40 bits','4,000 words of 16 bits','1,024 words of 8 bits','100 words of 64 bits','1000 locations (words) of 40 bits; a word can hold two 20-bit instructions.','١٠٠٠ كلمة × ٤٠ بت؛ الكلمة تحمل تعليمتين من ٢٠ بت.'],
+ ['The register holding the address of the next instruction to fetch is:','المسجّل الذي يحمل عنوان التعليمة التالية للجلب هو:','PC (Program Counter)','IR','MBR','AC','PC = address of the next instruction.','PC = عنوان التعليمة التالية.'],
+ ['An instruction cycle consists of:','تتكون دورة التعليمة من:','Fetch and Execute','Read and Write','Load and Store','Decode and Store only','Two steps: fetch then execute.','خطوتان: جلب ثم تنفيذ.'],
+ ['After each instruction fetch, the processor always:','بعد كل عملية جلب للتعليمة، يقوم المعالج دائمًا بـ:','Increments the PC','Clears the IR','Resets the MAR','Writes to memory','PC is incremented to point to the next instruction.','يزيد PC ليشير للتعليمة التالية.'],
+ ['When an interrupt is pending, the processor first:','عند وجود مقاطعة معلّقة، أول ما يفعله المعالج:','Suspends the program and saves its context','Ignores it','Fetches the next instruction','Shuts down','Suspend, save context (PC etc.), set PC to the handler address.','يوقف البرنامج ويحفظ سياقه ثم يضع PC على عنوان المعالج.'],
+ ['Divide by zero is a(n) ___ interrupt.','القسمة على صفر مقاطعة من نوع ___','Program','Timer','I/O','Hardware failure','Program interrupts come from instruction execution results.','مقاطعات البرنامج تنتج عن نتيجة تنفيذ تعليمة.'],
+ ['Which bus identifies the source or destination of data?','أي ناقل يحدد مصدر أو وجهة البيانات؟','Address bus','Data bus','Control bus','Power bus','Address bus = where; data bus = what; control bus = read/write, interrupt, clock.','ناقل العناوين = أين؛ البيانات = ماذا؛ التحكم = قراءة/كتابة ومقاطعة وساعة.'],
+ ['On a shared bus, how many devices can transmit at one time?','على ناقل مشترك، كم جهاز يمكنه الإرسال في نفس الوقت؟','Only one','Two','All devices','Any number if they are fast','Two at once would garble the signals.','جهازان معًا يشوّهان الإشارات.'],
+ ['Data retrieved in the same order in which it was stored is:','البيانات المسترجعة بنفس ترتيب تخزينها هي:','Sequential access','Random access','Direct access','Associative access','Sequential access (like tape).','وصول تسلسلي (مثل الشريط).'],
+ ['In random access memory, access time is:','في الذاكرة العشوائية زمن الوصول:','Constant, independent of previous accesses','Depends on the distance travelled','Always the slowest','Variable','Each location has a wired-in address.','لكل موقع عنوان مربوط بالعتاد.'],
+ ['As you go DOWN the memory hierarchy, capacity ___ and cost per bit ___.','كلما نزلنا في هرم الذاكرة السعة ___ والتكلفة لكل بت ___','increases, decreases','decreases, increases','increases, increases','decreases, decreases','Down = bigger, cheaper, slower, accessed less often.','للأسفل = أكبر وأرخص وأبطأ ويُستخدم أقل.'],
+ ['The memory level closest to the processor is:','مستوى الذاكرة الأقرب إلى المعالج هو:','Registers','Main memory','Hard disk','Tape','Registers are at the top.','المسجّلات في القمة.'],
+ ['On a cache miss, the processor:','عند حدوث cache miss يقوم المعالج بـ:','A block is read from main memory into the cache, then the word is delivered','Stops forever','Reads only from the disk','Deletes the cache','Block moved to cache, then word delivered.','تُنقل كتلة إلى الكاش ثم تُسلَّم الكلمة.'],
+ ['A logical (virtual) cache is placed:','الكاش المنطقي (الافتراضي) يوضع:','Between the processor and the MMU','Between the MMU and main memory','Inside main memory','Between memory and disk','It stores virtual addresses, so the processor reaches it without the MMU.','يخزّن عناوين افتراضية فيصل إليه المعالج بدون MMU.'],
+ ['In direct mapping, block 13 with a cache of 8 lines goes to line:','في التخطيط المباشر، الكتلة 13 مع كاش من 8 أسطر تذهب إلى السطر:','5','1','13','8','i = j mod m = 13 mod 8 = 5.','i = 13 mod 8 = 5.'],
+ ['The main disadvantage of direct mapping is:','العيب الرئيسي للتخطيط المباشر:','Thrashing: blocks mapping to the same line keep swapping','It is too expensive','It needs a replacement algorithm','It cannot store data','Fixed location per block can cause thrashing.','الموقع الثابت لكل كتلة يسبب thrashing.'],
+ ['"Replace the block that has had no reference for the longest time" describes:','«استبدال الكتلة التي لم يُشر إليها منذ أطول وقت» يصف:','LRU','FIFO','LFU','Random','LRU = Least Recently Used.','LRU = الأقل استخدامًا مؤخرًا.'],
+ ['Moore\'s law says the number of transistors on a chip:','قانون مور يقول إن عدد الترانزستورات على الشريحة:','Doubles about every year','Halves every year','Stays constant','Triples every month','Consequences: cost down, size down, performance up, power down.','النتائج: التكلفة والحجم والطاقة تنقص والأداء يزيد.']
+];
+var qi=0,qscore=0,qorder=[],qans=false;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function startQuiz(){qorder=shuffle(Q.map(function(_,i){return i}));qi=0;qscore=0;renderQ()}
+function renderQ(){
+  var box=$('#quizbox');
+  if(qi>=qorder.length){
+    var pct=Math.round(100*qscore/qorder.length);
+    box.innerHTML='<div class="qcard" style="text-align:center"><div class="qmeta" style="justify-content:center">DONE · انتهى</div><div class="score">'+qscore+' / '+qorder.length+'</div><p style="margin-top:10px">'+(pct>=80?'Strong. Do one pass of flashcards and stop.':pct>=60?'Good. Re-read the topics you missed.':'Go through the "Start here" checklist again, then retry.')+'</p><p class="ar" lang="ar">'+(pct>=80?'ممتاز! مرّي على البطاقات مرة وارتاحي.':pct>=60?'جيد. أعيدي قراءة المواضيع التي أخطأتِ فيها.':'ارجعي لقائمة "ابدأ هنا" ثم أعيدي المحاولة.')+'</p><div class="ctrls" style="justify-content:center"><button class="btn" id="qretry">Try again · أعيدي</button></div></div>';
+    $('#qretry').addEventListener('click',startQuiz);return;
+  }
+  var q=Q[qorder[qi]];qans=false;
+  var opts=shuffle([q[2],q[3],q[4],q[5]]);
+  box.innerHTML='<div class="qcard"><div class="qmeta"><span>Question '+(qi+1)+' / '+qorder.length+'</span><span>Score '+qscore+'</span></div><div class="qq">'+q[0]+'</div><div class="ar" lang="ar" style="color:var(--muted)">'+q[1]+'</div><div class="opts" id="opts"></div><div id="why"></div><div class="ctrls"><button class="btn" id="qnext" hidden>Next →</button></div></div>';
+  var ob=$('#opts');
+  opts.forEach(function(o){var b=document.createElement('button');b.className='opt';b.type='button';b.textContent=o;
+    b.addEventListener('click',function(){
+      if(qans)return;qans=true;var ok=o===q[2];if(ok)qscore++;
+      $$('.opt',ob).forEach(function(x){x.disabled=true;if(x.textContent===q[2])x.classList.add('right')});
+      if(!ok)b.classList.add('wrong');
+      $('#why').innerHTML='<div class="why"><b>'+(ok?'Correct ✓ صحيح':'Not quite ✗ غير صحيح. Answer: '+q[2])+'</b><div class="en">'+q[6]+'</div><div class="ar" lang="ar">'+q[7]+'</div></div>';
+      var nx=$('#qnext');nx.hidden=false;nx.textContent=qi===qorder.length-1?'See score · النتيجة':'Next →';nx.focus();
+    });ob.appendChild(b)});
+  $('#qnext').addEventListener('click',function(){qi++;renderQ()});
+}
+startQuiz();
+
+/* flashcards */
+var F=[
+ ['Define: Architecture','عرّفي: Architecture','Attributes of a system visible to the programmer. Describes WHAT the computer does (instruction set, bits for data, I/O mechanisms, addressing).','الخصائص الظاهرة للمبرمج. تصف ماذا يفعل الحاسوب (مجموعة التعليمات، عدد البتات، آليات I/O، العنونة).'],
+ ['Define: Organization','عرّفي: Organization','How features are implemented: hardware details transparent to the programmer (control signals, interfaces, memory technology).','كيف تُنفَّذ الميزات: تفاصيل عتادية مخفية عن المبرمج (إشارات التحكم، الواجهات، تقنية الذاكرة).'],
+ ['Define: ISA','عرّفي: ISA','Instruction Set Architecture: defines instruction formats, opcodes, registers, instruction and data memory, the effect of instructions on registers and memory, and an algorithm for controlling instruction execution.','تحدد صيغ التعليمات والـ opcodes والمسجّلات وذاكرة التعليمات والبيانات وأثر التعليمات وخوارزمية التحكم بالتنفيذ.'],
+ ['The 4 functions of a computer','الوظائف الأربع للحاسوب','1. Data processing\n2. Data storage\n3. Data movement\n4. Control','١. معالجة البيانات\n٢. تخزين البيانات\n٣. نقل البيانات\n٤. التحكم'],
+ ['The 4 structural components','المكوّنات الهيكلية الأربعة','CPU · Main memory · I/O · System interconnection (system bus)','CPU · الذاكرة الرئيسية · I/O · الربط (ناقل النظام)'],
+ ['What is inside the CPU?','ماذا يوجد داخل CPU؟','Control unit, ALU, Registers, CPU interconnection.','وحدة التحكم، ALU، المسجّلات، ربط داخلي.'],
+ ['Define: Core','عرّفي: Core','An individual processing unit on a processor chip (control unit, ALU, registers, maybe cache).','وحدة معالجة مستقلة على شريحة المعالج (تحكم، ALU، مسجّلات، وربما كاش).'],
+ ['Third generation computers','الجيل الثالث','Integrated circuits (ICs): discrete components (transistors, resistors, capacitors) integrated into one circuit. Smaller and faster. 1965–1977.','الدوائر المتكاملة: دمج المكوّنات المنفصلة في دائرة واحدة. أصغر وأسرع. ١٩٦٥–١٩٧٧.'],
+ ['Von Neumann: 3 key concepts','فون نيومان: المفاهيم الثلاثة','1. Data and instructions stored in memory\n2. Memory addressable by location\n3. Execution is sequential','١. البيانات والتعليمات مخزّنة في الذاكرة\n٢. الذاكرة قابلة للعنونة\n٣. التنفيذ تسلسلي'],
+ ['Von Neumann machine has…','تتكون آلة فون نيومان من…','Main memory (data+instructions), ALU, control unit, I/O equipment.','ذاكرة رئيسية (بيانات+تعليمات)، ALU، وحدة تحكم، معدّات I/O.'],
+ ['IAS memory size','حجم ذاكرة IAS','1,000 words × 40 bits. A word = 2 instructions of 20 bits (8-bit opcode + 12-bit address).','١٠٠٠ كلمة × ٤٠ بت. الكلمة = تعليمتان من ٢٠ بت (opcode ٨ بت + عنوان ١٢ بت).'],
+ ['Registers: PC, MAR, MBR, IR','المسجّلات: PC, MAR, MBR, IR','PC = next instruction address\nMAR = memory address for read/write\nMBR = data read/to write\nIR = current instruction','PC = عنوان التعليمة التالية\nMAR = عنوان الذاكرة\nMBR = البيانات المقروءة/المكتوبة\nIR = التعليمة الحالية'],
+ ['Instruction cycle (long answer)','دورة التعليمة (سؤال طويل)','Fetch: PC gives address, instruction read from memory into IR, PC incremented.\nExecute: processor–memory, processor–I/O, data processing, or control.\nThen check for interrupts.','الجلب: PC يعطي العنوان، تُقرأ التعليمة إلى IR، ويُزاد PC.\nالتنفيذ: معالج–ذاكرة، معالج–I/O، معالجة بيانات، أو تحكم.\nثم فحص المقاطعات.'],
+ ['4 categories of execute actions','أنواع إجراءات التنفيذ الأربعة','Processor–memory · Processor–I/O · Data processing · Control','معالج–ذاكرة · معالج–I/O · معالجة بيانات · تحكم'],
+ ['Interrupt + interrupt cycle','المقاطعة ودورتها','Interrupt = temporarily do another task, then return. Cycle: check → if pending: suspend program, save context (PC), set PC to handler address.','المقاطعة = عمل مهمة أخرى مؤقتًا ثم العودة. الدورة: فحص ← إذا وُجدت: إيقاف البرنامج، حفظ السياق (PC)، وضع PC على عنوان المعالج.'],
+ ['4 classes of interrupts','أنواع المقاطعات','Program · Timer · I/O · Hardware failure','برنامج · مؤقت · I/O · فشل عتاد'],
+ ['What is a bus?','ما هو الناقل؟','A shared communication pathway connecting 2+ devices. Only one device can transmit at a time (else signals are garbled).','مسار اتصال مشترك يربط جهازين أو أكثر. جهاز واحد فقط يرسل كل مرة.'],
+ ['The 3 buses','الناقلات الثلاثة','Data bus: data/instructions\nAddress bus: source/destination\nControl bus: read/write, interrupt request, clock','البيانات: بيانات/تعليمات\nالعناوين: المصدر/الوجهة\nالتحكم: قراءة/كتابة، طلب مقاطعة، ساعة'],
+ ['Access methods','طرق الوصول','Sequential (same order as stored, tape) · Direct (go near, then search, disk) · Random (constant time, RAM)','تسلسلي (بنفس ترتيب التخزين، شريط) · مباشر (اقفز ثم ابحث، قرص) · عشوائي (زمن ثابت، RAM)'],
+ ['Going down the hierarchy…','كلما نزلنا في الهرم…','Cost per bit ↓ · Capacity ↑ · Access time ↑ · Frequency of CPU access ↓','التكلفة لكل بت ↓ · السعة ↑ · زمن الوصول ↑ · تكرار وصول المعالج ↓'],
+ ['What is a cache?','ما هو الكاش؟','Small fast memory between CPU and main memory holding copies of frequently used parts of main memory. Hit: found. Miss: a block is loaded from main memory first.','ذاكرة صغيرة سريعة بين CPU والذاكرة الرئيسية تحتفظ بنسخ من الأجزاء الأكثر استخدامًا. Hit: موجودة. Miss: تُحمَّل كتلة من الذاكرة الرئيسية أولًا.'],
+ ['Logical vs physical cache','الكاش المنطقي والفيزيائي','Logical (virtual): stores virtual addresses, between processor and MMU.\nPhysical: stores physical addresses, between MMU and main memory.','المنطقي: يخزّن عناوين افتراضية، بين المعالج وMMU.\nالفيزيائي: يخزّن عناوين فيزيائية، بين MMU والذاكرة الرئيسية.'],
+ ['Direct mapping','التخطيط المباشر','i = j mod m. One possible line per block. Simple, cheap, but thrashing when two blocks share a line.','i = j mod m. سطر واحد محتمل لكل كتلة. بسيط ورخيص لكن يسبب thrashing عندما تتشارك كتلتان نفس السطر.'],
+ ['Replacement algorithms','خوارزميات الاستبدال','LRU: least recently used · FIFO: oldest in cache · LFU: fewest hits · Random','LRU: الأقل استخدامًا مؤخرًا · FIFO: الأقدم · LFU: الأقل تكرارًا · Random: عشوائي']
+];
+var fi=0,fflip=false,fknown={},forder=F.map(function(_,i){return i});
+function renderF(){
+  var c=F[forder[fi]],el=$('#fc');
+  el.className='fc'+(fflip?' back':'');
+  el.innerHTML='<span class="side">'+(fflip?'ANSWER · الجواب':'QUESTION · السؤال')+'</span><div><div class="en">'+(fflip?c[2]:c[0]).replace(/</g,'&lt;')+'</div><div class="ar" lang="ar">'+(fflip?c[3]:c[1])+'</div></div>';
+  $('#fcount').textContent='Card '+(fi+1)+' / '+F.length;
+  $('#fknown').textContent='Known: '+Object.keys(fknown).length+' / '+F.length;
+}
+function fgo(d){fi=(fi+d+F.length)%F.length;fflip=false;renderF()}
+$('#fc').addEventListener('click',function(){fflip=!fflip;renderF()});
+$('#fnext').addEventListener('click',function(){fgo(1)});$('#fprev').addEventListener('click',function(){fgo(-1)});
+$('#fgot').addEventListener('click',function(){fknown[forder[fi]]=1;fgo(1)});
+$('#fagain').addEventListener('click',function(){delete fknown[forder[fi]];fgo(1)});
+$('#fshuf').addEventListener('click',function(){forder=shuffle(forder);fi=0;fflip=false;renderF()});
+renderF();
+})();
+</script>
+
+</body></html>
